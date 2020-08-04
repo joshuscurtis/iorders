@@ -7,16 +7,17 @@ initial-scale=1">
 <div style="width: 80%; margin-left: 10%;">
     <div>
         <a style="float:right; margin-top: 5px;" onclick="window.open('takeaway.html', 'takeaway.html'); return false;" class="btn btn-primary text-white" role="button" aria-pressed="true">
-           Takeaway Orders
+            Takeaway Orders
         </a>
         <a style="float:left; margin-top: 5px;" onclick="window.open('https://joshuscurtis.github.io/theway/help.html', 'https://joshuscurtis.github.io/theway/help.html'); return false;" class="btn btn-info text-white" role="button" aria-pressed="true">
             Help
         </a>
     </div>
-<br>
-<br>
+    <br>
+    <br>
     <div>
         <h4 class="text-center">Table Orders </h4>
+        <p id="count" class="text-center"></p>
     </div>
     <div id="loading">
         <h5 class="text-center"><i>Please wait while the page loads...</i></h5>
@@ -63,7 +64,7 @@ var htmldata;
 var latestOrder = parseInt(localStorage.getItem("maxOrderNumTable")); //set init max order num
 var currentClosed = localStorage.getItem("closed") //all closed orders
 localStorage.setItem("closed", currentClosed + ",101"); //init closed order on page load
-var numOfPrevOrders = 15; //number of previous orders to load
+var numOfPrevOrders = 10; //number of previous orders to load
 var loading = 1
 var table;
 
@@ -121,10 +122,16 @@ console.log("HERE")
 
 function getOrders() {
     $.ajax(settings).done(function(response) {
-        console.log("getOrders");
+       // console.log("getOrders");
         //init
         localStorage.setItem('izettle', JSON.stringify(response));
         var order = JSON.parse((localStorage.getItem('izettle')));
+		count = document.getElementById("count")
+		count.innerHTML = "<strong col> Open Orders: "+(countOpenOrders(order, "table")) +"</strong>"
+		if(countOpenOrders(order, "table")>=5) count.setAttribute("style", "color: red;")
+		if(countOpenOrders(order, "table")<=4) count.setAttribute("style", "color: orange;")
+		if(countOpenOrders(order, "table")<=2) count.setAttribute("style", "color: green;")
+
         var i;
         var j;
         var orderJSON = new Object();
@@ -159,8 +166,7 @@ function getOrders() {
 
 
 function getLatestOrder(latestOrder, e) {
-
-    console.log("Updating with latest orders")
+    //console.log("Updating with latest orders")
     var orderElementExists = document.getElementById(e);
     if (!orderElementExists) {
 
@@ -211,14 +217,16 @@ function initCreateElements(latestOrder, e) {
     for (e = latestOrder - 1; e >= latestOrder - numOfPrevOrders; e--) {
         var closedOrders = localStorage.getItem("closed");
         var newOrderTable = localStorage.getItem("newOrderTable");
-            htmldata = localStorage.getItem(e);
-            htmldata = JSON.parse(htmldata);
-            itemsInOrder = htmldata.length;
-            var orderData = htmldata;
+            htmldata2 = localStorage.getItem(e);
+            htmldata2 = JSON.parse(htmldata2);
+            if (htmldata2 != null) {
+            itemsInOrder = htmldata2.length;
+        }
+            var orderData = htmldata2;
         closedOrders = closedOrders.split(",");
         newOrderTable = newOrderTable.split(",");
         console.log("NEW: "+newOrderTable);
-        if (doesOrderContainTable(htmldata) == true) {
+        if (doesOrderContainTable(htmldata2) == true) {
             //if e in closed order list then do nothing, else display:
             if (closedOrders.includes(e.toString()) == false) {
                     body = document.getElementById("result");
@@ -231,7 +239,7 @@ function initCreateElements(latestOrder, e) {
                 }
                 a.setAttribute("onclick", 'highlight(this);')
                 body.insertAdjacentElement("beforebegin", a);
-                buildHTML = buildOrderHTML(e, htmldata, itemsInOrder);
+                buildHTML = buildOrderHTML(e, htmldata2, itemsInOrder);
                 document.getElementById(e).innerHTML = buildHTML;          
             }
         }
@@ -295,11 +303,6 @@ function buildOrderHTML(latestOrderNum, orderData, itemsInOrder) {
     return buildHTML;
 }
 
-
-
-
-
-
 function refreshAppModal() {
         Swal.fire({
           title: 'ERROR',
@@ -316,7 +319,71 @@ function refreshAppModal() {
         });
     }
 
+   	var orderNums = []; 
+function countOpenOrders(orderData, type) {
+	var orderNums = [] 
+	var ordersInData = orderData.purchases.length;
+	var closedOrders = (localStorage.getItem("closed")).split(",");
 
+		for (var y = 0; y < posOfTable(orderData)+1; y++) {
+			orderNum = orderData.purchases[y].purchaseNumber
+			//not closed then...
+			if (isClosed(orderNum) == false) {
+				if(orderNums.indexOf(orderNum) == -1) {
+					if (doesOrderContainTable(orderData.purchases[y].products) == true && type == "table") {
+						orderNums.push(orderNum)
+					}
+					if (type == "takeaway") {
+						return  countOpenOrders(orderData, "all") -  countOpenOrders(orderData, "table");
+					}
+					if (type == "all"){
+						orderNums.push(orderNum);
+					}
+				}
+			}
+		}
+		if(orderNums == []) return 0;
+		return orderNums.length
+}
+
+
+Object.filter = (obj, predicate) => 
+    Object.keys(obj)
+          .filter( key => predicate(obj[key]) )
+          .reduce( (res, key) => (res[key] = obj[key], res), {} );
+
+
+function posOfTable(orderData) {
+	var ordersInData = orderData.purchases.length;
+	var result = []
+	var id =[]
+	var obj = {}
+
+	for (var y = 0; y < ordersInData; y++) {
+			result.push(doesOrderContainTable(orderData.purchases[y].products))
+			id.push(orderData.purchases[y].purchaseNumber)
+	}
+    for(var i = 0; i < id.length; i++){ 
+        obj[id[i]] = result[i]; 
+    } 
+
+	var filtered = Object.filter(obj, bol => bol == true); 
+	let arr = Object.keys(filtered);
+	let max = Math.max(arr);
+ 		
+	arr[arr.length - numOfPrevOrders]
+	
+ 	return 	orderData.purchases[0].purchaseNumber-arr[arr.length - numOfPrevOrders]
+
+ 	}
+
+function isClosed(orderNum){
+	var closedOrders = (localStorage.getItem("closed")).split(",");
+	if (closedOrders.includes(orderNum.toString()) == true) {
+		return true
+	}
+	return false
+}
 
 function closeOrderModal(id,element) {
           Swal.fire({
@@ -338,7 +405,9 @@ function closeOrderModal(id,element) {
 
 
 function doesOrderContainTable(orderData) {
+	if (orderData != null) {
     var itemsInOrder = orderData.length;
+}
     var count = -1;
     var tableCheck = null;
     var tableOrder;
