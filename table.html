@@ -115,8 +115,11 @@ setInterval(function() {
 
 }, 1000)
 
-console.log("HERE")
 
+//everyTenSeconds
+setInterval(function() {
+if (countOpenOrders(JSON.parse(localStorage.getItem("izettle")), "table") >= 10) tooManyModal();
+}, 10000)
 
 
 
@@ -377,6 +380,9 @@ function posOfTable(orderData) {
 
  	}
 
+
+
+
 function isClosed(orderNum){
 	var closedOrders = (localStorage.getItem("closed")).split(",");
 	if (closedOrders.includes(orderNum.toString()) == true) {
@@ -403,6 +409,20 @@ function closeOrderModal(id,element) {
         });
 }
 
+
+function tooManyModal() {
+		num = countOpenOrders(JSON.parse(localStorage.getItem("izettle")), "table")
+
+          Swal.fire({
+          title: 'You have '+ num + ' orders open!',
+          text: "You may have forgotten to close some orders",
+          icon: 'warning',
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ok!'
+        });
+}
 
 function doesOrderContainTable(orderData) {
 	if (orderData != null) {
