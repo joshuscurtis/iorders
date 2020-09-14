@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ReactDOM from "react-dom";
-//
+
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import AppBar from "@material-ui/core/AppBar";
@@ -21,13 +20,17 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slider from '@material-ui/core/Slider';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-
 import { green } from '@material-ui/core/colors';
-
-import "./styles.css";
 
 import io from 'socket.io-client';
 import $ from 'jquery'; 
+
+import "./styles.css";
+
+
+const alertTime = { Alert: 60 }
+
+const alertTimeContext = React.createContext(alertTime)
 
 
  function SettingsDialog(props) {
@@ -113,6 +116,8 @@ return (
 
 
 function checkAlert(createdTime, alertAfter) {
+
+	
 	var timeNow = Date.now();
 	var timeOpen = timeNow - createdTime;
 	timeOpen = new Date(timeOpen);
@@ -191,12 +196,12 @@ function CardApp(props) {
 		const [close, setClose] = useState(false);
 		const [timer, setTimer] = useState(timeCalc(props.time));
 		const [alert, setAlert] = useState("");
-	
+		const alert = useContext(alertTimeContext);
 	//calc time
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setTimer(timeCalc(props.time));
-			if(checkAlert(props.time, 600)) setAlert("flash");
+			if(checkAlert(props.time, alert.Alert)) setAlert("flash");
 		}, 1000);
 		return () => {
 			setTimer(timeCalc(props.time));
@@ -459,8 +464,6 @@ function cardTimer(createdTime) {
 	return (timeOpenStr);
 }
 
-
-
 function updatePG(id, column, value) {
 	var settings = {
 		"url": "/update",
@@ -479,8 +482,6 @@ function updatePG(id, column, value) {
 		console.log("fail ")
 	});
 }
-
-
 
 export default function App() {
 const socket = io();	
@@ -511,6 +512,7 @@ useEffect(() => {
 }, []);
 return (
   <div style={{ margin: 0, }}>
+  <alertTimeContext.Provider value={alertTime}>
   	 <ButtonAppBar/>
 		<Container className="App_Contents" maxWidth="lg">
 			<Grid container spacing={3}>
@@ -524,6 +526,7 @@ return (
 			  	</Grid>
 			</Grid>
   		</Container>
+		</alertTimeContext.Provider>
 	</div>
   );}
 
