@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ReactDOM from "react-dom";
 
+import { createGlobalState } from 'react-hooks-global-state';
+
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -28,8 +30,11 @@ import $ from 'jquery';
 import "./styles.css";
 
 
-const alertTime = { Alert: 60 }
+const initialState = { count: 0 };
+const { useGlobalState } = createGlobalState(initialState);
 
+
+const alertTime = { Alert: 60 }
 const alertTimeContext = React.createContext(alertTime)
 
 
@@ -50,9 +55,10 @@ const alertTimeContext = React.createContext(alertTime)
 	function valuetext(value) {
   		return `${value}°C`;
 	}
-	
+	const [count, setCount] = useGlobalState('count');
 	const handleChange = (event, newValue) => {
 	    setAlertValue(newValue);
+		setCount(newValue)
 		console.log(alertValue);
 	};
 
@@ -197,11 +203,13 @@ function CardApp(props) {
 		const [timer, setTimer] = useState(timeCalc(props.time));
 		const [alert, setAlert] = useState("");
 		const alerter = useContext(alertTimeContext);
+		const [count, setCount] = useGlobalState('count');
+
 	//calc time
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setTimer(timeCalc(props.time));
-			if(checkAlert(props.time, alerter.Alert)) setAlert("flash");
+			if(checkAlert(props.time, count*60)) setAlert("flash");
 		}, 1000);
 		return () => {
 			setTimer(timeCalc(props.time));
