@@ -26,6 +26,10 @@ import { green } from '@material-ui/core/colors';
 
 import "./styles.css";
 
+import io from 'socket.io-client';
+import $ from 'jquery'; 
+
+
 const theme = createMuiTheme({
   palette: {
     primary: green,
