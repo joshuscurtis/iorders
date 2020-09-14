@@ -198,9 +198,19 @@ function CardApp(props) {
 		return (null);
 	}
 	//set states
-	const [close, setClose] = useState(false);
-	const [timer, setTimer] = useState(timeCalc(props.time));
-	const [alert, setAlert] = useState("");
+	useEffect(() => {
+		const [close, setClose] = useState(false);
+		const [timer, setTimer] = useState(timeCalc(props.time));
+		const [alert, setAlert] = useState("");
+	return () => {
+		console.log("unmount")
+	}
+	},[]);
+	
+	
+	
+	
+	
 	
 	//calc time
 	useEffect(() => {
