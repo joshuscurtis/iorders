@@ -13,22 +13,18 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Box from "@material-ui/core/Box";
 import CardHeader from "@material-ui/core/CardHeader";
-import ButtonBase from '@material-ui/core/ButtonBase';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Slide from '@material-ui/core/Slide';
 import Slider from '@material-ui/core/Slider';
 
-import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
-import { green, red } from '@material-ui/core/colors';
+import { green } from '@material-ui/core/colors';
 
 import "./styles.css";
-
-
 
 const theme = createMuiTheme({
   palette: {
@@ -194,23 +190,12 @@ function timeCalc(createdTime) {
 
 function CardApp(props) {
 	//do not create closed orders
-	if(props.isclosed === true){
-		return (null);
-	}
+
 	//set states
-	useEffect(() => {
 		const [close, setClose] = useState(false);
 		const [timer, setTimer] = useState(timeCalc(props.time));
 		const [alert, setAlert] = useState("");
-	return () => {
-		console.log("unmount")
-	}
-	},[]);
-	
-	
-	
-	
-	
+
 	
 	//calc time
 	useEffect(() => {
@@ -229,15 +214,15 @@ function CardApp(props) {
 	//default button colours
 	var kitCol = false
 	var barCol = false
-	if(props.assignee == "false") kitCol = true
-	if(props.assignee2 == "false") barCol = true
+	if(props.assignee === "false") kitCol = true
+	if(props.assignee2 === "false") barCol = true
 	
 	//create card title
 	var cardTitle = "Order: " + (props.orderid%99+1);
 	if (props.tablenum != null) {
 		cardTitle = props.tablenum + " (Order: "+(props.orderid%99+1)+")";
 	}
-	if (props.tablenum.substring(0,5) != "Table") {
+	if (props.tablenum.substring(0,5) !== "Table") {
 		cardTitle = "Order: " + (props.orderid%99+1);
 	}
 
@@ -254,7 +239,7 @@ function CardApp(props) {
 	
 	//onClick action
  	const handleClick = e => {
-		if(props.isprocessing == false) updatePG(id, 'isprocessing', true);
+		if(props.isprocessing === false) updatePG(id, 'isprocessing', true);
 		e.stopPropagation();
 	}
 	
@@ -369,7 +354,6 @@ function TakeawayStream(props) {
 	
 //	console.log(orders);
 	for (var i = 0; i < orders.length; i++) {
-		if(orders[i].tablenum.substring(0,5) != "Table"){
     		rows.push(<CardApp 
 						orderid={orders[i].order_id}
 						order={orders[i]} 
@@ -381,7 +365,6 @@ function TakeawayStream(props) {
 						tablenum={orders[i].tablenum}
 						assignee={orders[i].assignee}
 						assignee2={orders[i].assignee2}/>);
-		}
 	}
   return (
     <div className="Takeaway__Stream">
@@ -399,7 +382,6 @@ function TableStream(props) {
 	var orders = props.orders;
 //	console.log(orders);
 	for (var i = 0; i < orders.length; i++) {
-		if(orders[i].tablenum.substring(0,5) == "Table") {
     		rows.push(<CardApp 
 						orderid={orders[i].order_id}
 						order={orders[i]} 
@@ -411,7 +393,7 @@ function TableStream(props) {
 						tablenum={orders[i].tablenum}
 						assignee={orders[i].assignee}
 						assignee2={orders[i].assignee2}/>);
-		}
+		
 	}
   return (
     <div className="Table__Stream">
@@ -430,8 +412,8 @@ var comment = "";
 const [strikeClass, setStrikeClass] = useState("");
 
 const handleClick = e => {
-	if(strikeClass != "crossed-line") setStrikeClass("crossed-line");
-	if(strikeClass == "crossed-line") setStrikeClass("");
+	if(strikeClass !== "crossed-line") setStrikeClass("crossed-line");
+	if(strikeClass === "crossed-line") setStrikeClass("");
 }
  
  return (
@@ -459,7 +441,7 @@ function OrderItems(props) {
 	//console.log(order);
 	var rows = [];
 	for (var i = 0; i < order.products.length; i++) {
-		if (order.products[i].name.substring(0,5) != "Table") {
+		if (order.products[i].name.substring(0,5) !== "Table") {
     		rows.push(<OrderItem variantName={order.products[i].variantName} itemName={order.products[i].name} qty={order.products[i].quantity} comment={order.products[i].comment}
 				key={i} />);
 		}
