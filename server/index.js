@@ -278,7 +278,6 @@ basicAuth({
 	app.set('views', path.join(__dirname, 'views'))
 	app.set('view engine', 'ejs')
 
-    app.get('/', myAuth, (req, res) => res.render('pages/table'))
 	
 	app.get('/orders/all', adminAuth , (req,result) => {
 		pool.query('SELECT * FROM public.devorders', (err, res) => {
@@ -290,12 +289,7 @@ basicAuth({
 		result.send("qty")
 	})
 	
-	app.get('/stats',adminAuth, (req,result) => {
-		pool.query('SELECT order_id, time as created, closetime as closed, (closetime-time) as timetoclose, to_timestamp(CAST((time) as bigint)/1000) as date from devorders where closetime >1 order BY order_id ASC;', (err, res) => {
-				ev = res.rows;
-				result.render('pages/graph', {eventData : ev});
-		});	
-	})
+
 	
 	
 	
@@ -425,12 +419,7 @@ app.post('/updateAvg', (req,res) => {
 		})
 	})
 	
-	app.get('/react', (req,res) => {
-		res.render('pages/react');
-	})
-	app.get('/dev', (req,res) => {
-		res.render('pages/react__stats');
-	})
+	
 	
 //START SERVER
 server.listen(PORT);
