@@ -281,7 +281,6 @@ useEffect(() => {
 	
 	
 	return (
-	<ThemeProvider theme={theme}>
 	 	<Button 
 			className="Card__BarButton"
 			onClick={handleClick}
@@ -292,7 +291,6 @@ useEffect(() => {
 		>
 		Bar
 		</Button>
-	</ThemeProvider>
 	);
 }
 
