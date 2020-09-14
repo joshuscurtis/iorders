@@ -30,14 +30,6 @@ import io from 'socket.io-client';
 import $ from 'jquery'; 
 
 
-// const theme = createMuiTheme({
-//   palette: {
-//     primary: green,
-//     secondary: green,
-//     error: green,
-//   },
-//   });
-
  function SettingsDialog(props) {
 	const [open, setOpen] = React.useState(false);
 	const [alertValue, setAlertValue] = React.useState(10);
