@@ -503,7 +503,7 @@ function updatePG(id, column, value) {
 
 
 
-function App() {
+export default function App() {
 const socket = io();	
 const [orderData, setOrderData] = useState(0);
 
