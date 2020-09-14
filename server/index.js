@@ -252,6 +252,18 @@ basicAuth({
   users: { 'admin': 'supersecret' },
   
 })
+
+  // Priority serve any static files.
+  app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
+
+  // Answer API requests.
+  app.get('/api', function (req, res) {
+    res.set('Content-Type', 'application/json');
+    res.send('{"message":"Hello from the custom server!"}');
+  });
+
+ 
+
 //server
 	myAuth = basicAuth({
 	  users: { 'admin': 'espresso',
@@ -274,9 +286,6 @@ basicAuth({
 	  realm: 'foo',
   });
 
-	app.use(express.static(path.join(__dirname, 'public')))
-	app.set('views', path.join(__dirname, 'views'))
-	app.set('view engine', 'ejs')
 
 	
 	app.get('/orders/all', adminAuth , (req,result) => {
@@ -322,7 +331,7 @@ basicAuth({
 		const avg = req.body.avgtime;
 		const diff = req.body.diff;
 		
-		var thisQuery = "INSERT INTO public.stats (date, avgtime, diff) VALUES ('"+date+"', "+avg+", "+diff+");"
+		var thisQuery = "INSERT INTO .stats (date, avgtime, diff) VALUES ('"+date+"', "+avg+", "+diff+");"
 					
 		console.log(thisQuery);
 		pool.query(thisQuery, (err, res) => {
@@ -418,7 +427,11 @@ app.post('/updateAvg', (req,res) => {
 			res.send(result.rows);
 		})
 	})
-	
+	 
+// All remaining requests return the React app, so it can handle routing.
+  app.get('*', function(request, response) {
+    response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
+  });
 	
 	
 //START SERVER
