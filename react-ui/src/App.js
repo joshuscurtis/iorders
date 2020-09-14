@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from "react-dom";
-
+//
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -358,6 +358,7 @@ function TakeawayStream(props) {
 	
 //	console.log(orders);
 	for (var i = 0; i < orders.length; i++) {
+		if(orders[i].isclosed !== true){
     		rows.push(<CardApp 
 						orderid={orders[i].order_id}
 						order={orders[i]} 
@@ -369,6 +370,7 @@ function TakeawayStream(props) {
 						tablenum={orders[i].tablenum}
 						assignee={orders[i].assignee}
 						assignee2={orders[i].assignee2}/>);
+		}
 	}
   return (
     <div className="Takeaway__Stream">
@@ -385,20 +387,21 @@ function TableStream(props) {
 	var rows = [];
 	var orders = props.orders;
 //	console.log(orders);
-	for (var i = 0; i < orders.length; i++) {
-    		rows.push(<CardApp 
-						orderid={orders[i].order_id}
-						order={orders[i]} 
-						time={orders[i].time}
-						isprocessing={orders[i].isprocessing}
-						istable={orders[i].istable}
-						isnew={orders[i].isnew}
-						isclosed={orders[i].isclosed}
-						tablenum={orders[i].tablenum}
-						assignee={orders[i].assignee}
-						assignee2={orders[i].assignee2}/>);
-		
+for (var i = 0; i < orders.length; i++) {
+	if(orders[i].isclosed !== true){
+			rows.push(<CardApp 
+					orderid={orders[i].order_id}
+					order={orders[i]} 
+					time={orders[i].time}
+					isprocessing={orders[i].isprocessing}
+					istable={orders[i].istable}
+					isnew={orders[i].isnew}
+					isclosed={orders[i].isclosed}
+					tablenum={orders[i].tablenum}
+					assignee={orders[i].assignee}
+					assignee2={orders[i].assignee2}/>);
 	}
+}
   return (
     <div className="Table__Stream">
 		<Typography className="Stream__title" align="center" variant="h5">
