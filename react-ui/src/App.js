@@ -199,7 +199,6 @@ function CardApp(props) {
 		const [close, setClose] = useState(false);
 		const [timer, setTimer] = useState(timeCalc(props.time));
 		const [alert, setAlert] = useState("");
-
 	
 	//calc time
 	useEffect(() => {
@@ -246,7 +245,8 @@ function CardApp(props) {
 		if(props.isprocessing === false) updatePG(id, 'isprocessing', true);
 		e.stopPropagation();
 	}
-	
+	if(props.isclosed === true ) return (null)
+
   return (
       <div className={alert}>
 		<Card className="OrderCard__Main" onClick={handleClick} style={{backgroundColor: props.isprocessing ? '#f0ad4e' : '#5cb85c',}} variant="outlined">
