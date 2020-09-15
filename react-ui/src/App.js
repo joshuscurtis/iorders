@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ReactDOM from "react-dom";
 
 import { createGlobalState } from 'react-hooks-global-state';
@@ -178,13 +178,7 @@ return (
   );
 }
 
-function timeCalc(createdTime) {
-	var timeNow = Date.now();
-	var timeOpen = timeNow - createdTime;
-	timeOpen = new Date(timeOpen);
-	var timeOpenStr = timeOpen.getMinutes() + "m " + timeOpen.getSeconds()+"s"
-	return (timeOpenStr);
-}
+
 
 function CardApp(props) {
 	//do not create closed orders
@@ -193,13 +187,22 @@ function CardApp(props) {
 	const [timer, setTimer] = useState("null");
 	const [alert, setAlert] = useState("");
 	const [count, setCount] = useGlobalState('count');
-	const ref = useRef(timer);
+
 	//calc time
+	function timeCalc(createdTime) {
+		const timeNow = Date.now();
+		const timeOpen = timeNow - createdTime;
+		let timeOpen = new Date(timeOpen);
+		const timeOpenStr = timeOpen.getMinutes() + "m " + timeOpen.getSeconds()+"s"
+	return (timeOpenStr);
+	}
+	
+	
 	useEffect(() => {
 		setTimer(ref.current);
 		if(checkAlert(props.time, count)) setAlert("flash");
 		const interval = setInterval(() => {
-			setTimer(ref.current);
+			setTimer(props.time);
 		}, 1000);
 		return () => {
 			setTimer(timeCalc(props.time));
