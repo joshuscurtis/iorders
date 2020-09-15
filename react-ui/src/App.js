@@ -125,14 +125,14 @@ return (
 
 
 function checkAlert(createdTime, alertAfter) {
-	const [count, setCount] = useGlobalState('count');
+	
 	
 	var timeNow = Date.now();
 	var timeOpen = timeNow - createdTime;
 	timeOpen = new Date(timeOpen);
 	timeOpen = timeOpen/1000
 	console.log(count)
-	if(timeOpen > count*60) return true
+	if(timeOpen > alertAfter*60) return true
 	else return false
 }
 
@@ -215,7 +215,7 @@ function CardApp(props) {
 		const interval = setInterval(() => {
 			setTimer(timeCalc(props.time));
 			console.log("count "+count);
-			if(checkAlert(props.time, count*60)) setAlert("flash");
+			if(checkAlert(props.time, count)) setAlert("flash");
 		}, 1000);
 		return () => {
 			setTimer(timeCalc(props.time));
