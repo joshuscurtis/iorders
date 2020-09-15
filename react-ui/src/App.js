@@ -34,7 +34,7 @@ import $ from 'jquery';
 import "./styles.css";
 
 
-const initialState = { count: 0 };
+const initialState = { count: 1 };
 const { useGlobalState, setGlobalState } = createGlobalState(initialState);
 
 
@@ -206,15 +206,17 @@ function CardApp(props) {
 		const [alert, setAlert] = useState("");
 		const alerter = useContext(alertTimeContext);
 		
+		const [count, setCount] = useGlobalState('count');
 		
-
+		useEffect(() => {
+			if(checkAlert(props.time, count)) setAlert("flash");
+			console.log("count "+count);
+		},[]);
+		
 	//calc time
 	useEffect(() => {
-		const [count, setCount] = useGlobalState('count');
 		const interval = setInterval(() => {
 			setTimer(timeCalc(props.time));
-			console.log("count "+count);
-			if(checkAlert(props.time, count)) setAlert("flash");
 		}, 1000);
 		return () => {
 			setTimer(timeCalc(props.time));
