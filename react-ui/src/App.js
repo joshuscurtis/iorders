@@ -38,9 +38,6 @@ const initialState = { count: 10};
 const { useGlobalState, setGlobalState } = createGlobalState(initialState);
 
 
-const alertTime = { Alert: 60 }
-const alertTimeContext = React.createContext(alertTime)
-
 
  function SettingsDialog(props) {
 	const [open, setOpen] = React.useState(false);
@@ -85,7 +82,7 @@ return (
 	  
       <DialogContent>
      		<DialogContentText id="alert-dialog-description">
-				Time before alert:
+				Time before alert (minutes):
             </DialogContentText>
 			 <Slider
 		        defaultValue={count}
@@ -99,8 +96,10 @@ return (
 				value={count}
 				/>
 		    <DialogContentText id="alert-dialog-description">
+				This will adjust the time before an alert is shown for any new orders ariving.
 		    </DialogContentText>
 		    <DialogContentText id="alert-dialog-description">
+				WIP
 		    </DialogContentText>
 			<Button 
 			  	size="large" 
@@ -204,19 +203,14 @@ function CardApp(props) {
 		const [close, setClose] = useState(false);
 		const [timer, setTimer] = useState(timeCalc(props.time));
 		const [alert, setAlert] = useState("");
-		const alerter = useContext(alertTimeContext);
-		
 		const [count, setCount] = useGlobalState('count');
 		
-		useEffect(() => {
-			if(checkAlert(props.time, count)) setAlert("flash");
-			console.log("count "+count);
-			console.log("alterer "+alerter.Alert);
-		},[]);
 		
 	//calc time
 	useEffect(() => {
 		const interval = setInterval(() => {
+			if(checkAlert(props.time, count)) setAlert("flash");
+			console.log("count "+count);
 			setTimer(timeCalc(props.time));
 		}, 1000);
 		return () => {
