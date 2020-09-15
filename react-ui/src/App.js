@@ -198,27 +198,26 @@ function timeCalc(createdTime) {
 
 function CardApp(props) {
 	//do not create closed orders
-
 	//set states
 		const [close, setClose] = useState(false);
-		const [timer, setTimer] = useState(timeCalc(props.time));
-		const [alert, setAlert] = useState("");
 		const [count, setCount] = useGlobalState('count');
 		
 		
+	const [timer, setTimer] = useState(timeCalc(props.time));
+	const [alert, setAlert] = useState("");
+	
 	//calc time
 	useEffect(() => {
 		const interval = setInterval(() => {
-			if(checkAlert(props.time, count)) setAlert("flash");
-			console.log("count "+count);
 			setTimer(timeCalc(props.time));
+			if(checkAlert(props.time, count)) setAlert("flash");
 		}, 1000);
 		return () => {
 			setTimer(timeCalc(props.time));
 			clearInterval(interval);
 			console.log("unmount")
 		}
-	},[]);
+		},[]);
 	
 	
 	//default button colours
@@ -250,6 +249,7 @@ function CardApp(props) {
 	//onClick action
  	const handleClick = e => {
 		if(props.isprocessing === false) updatePG(id, 'isprocessing', true);
+		setTimer(timeCalc(props.time));
 		e.stopPropagation();
 	}
 	if(props.isclosed === true ) return (null)
