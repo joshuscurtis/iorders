@@ -125,13 +125,10 @@ return (
 
 
 function checkAlert(createdTime, alertAfter) {
-	
-	
 	var timeNow = Date.now();
 	var timeOpen = timeNow - createdTime;
 	timeOpen = new Date(timeOpen);
 	timeOpen = timeOpen/1000
-	console.log(count)
 	if(timeOpen > alertAfter*60) return true
 	else return false
 }
