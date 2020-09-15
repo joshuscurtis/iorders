@@ -197,15 +197,14 @@ function CardApp(props) {
 	return (timeOpenStr);
 	}
 	
-	
+	//if(checkAlert(props.time, count)) setAlert("flash");
 	useEffect(() => {
-		if(checkAlert(props.time, count)) setAlert("flash");
 		const interval = setInterval(() => {
 			setTimer(timeCalc(props.time));
 		}, 1000);
 		return () => {
 			clearInterval(interval);
-			console.log("unmount")
+			console.log("unmount timer")
 		}
 		},[]);
 	
