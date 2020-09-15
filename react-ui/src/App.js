@@ -205,9 +205,10 @@ function CardApp(props) {
 		
 	const [timer, setTimer] = useState(timeCalc(props.time));
 	const [alert, setAlert] = useState("");
-	setTimer(timeCalc(props.time));
+
 	//calc time
 	useEffect(() => {
+		setTimer(timeCalc(props.time));
 		if(checkAlert(props.time, count)) setAlert("flash");
 		const interval = setInterval(() => {
 			setTimer(timeCalc(props.time));
