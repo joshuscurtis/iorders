@@ -3,10 +3,6 @@ import ReactDOM from "react-dom";
 
 import { createGlobalState } from 'react-hooks-global-state';
 
-import {SettingsProvider} from './SettingsContext';
-import {SettingsContext} from './SettingsContext';
-
-
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -151,9 +147,7 @@ function AlertDialog(props) {
 		e.stopPropagation();
 	    setOpen(false);
 	};
-	
-
-	
+		
 return (
     <div>
       <Button size="large" variant="contained" color="secondary" onClick={handleClickOpen}>
@@ -194,18 +188,14 @@ function timeCalc(createdTime) {
 	return (timeOpenStr);
 }
 
-
-
 function CardApp(props) {
 	//do not create closed orders
 	//set states
-		const [close, setClose] = useState(false);
-		const [count, setCount] = useGlobalState('count');
-		
-		
-	const [timer, setTimer] = useState(timeCalc(props.time));
+	const [close, setClose] = useState(false);
+	const [timer, setTimer] = useState("null");
 	const [alert, setAlert] = useState("");
-
+	const [count, setCount] = useGlobalState('count');
+	
 	//calc time
 	useEffect(() => {
 		setTimer(timeCalc(props.time));
@@ -221,12 +211,11 @@ function CardApp(props) {
 		}
 		},[]);
 	
-	
 	//default button colours
-	var kitCol = false
-	var barCol = false
-	if(props.assignee === "false") kitCol = true
-	if(props.assignee2 === "false") barCol = true
+	var kitCol = false;
+	var barCol = false;
+	if(props.assignee === "false") kitCol = true;
+	if(props.assignee2 === "false") barCol = true;
 	
 	//create card title
 	var cardTitle = "Order: " + (props.orderid%99+1);
@@ -278,24 +267,19 @@ function CardApp(props) {
 }
 
 function BarButton(props){
-const [id, setId] = useState(0);
-//console.log(props.orderId)
+	const [id, setId] = useState(0);
 
-useEffect(() => {
-	setId(props.orderId);
-	console.log('setId: ' + id)
-	return () => {
-		console.log('return block')
-
-	}
-}, []);
-
+	useEffect(() => {
+		setId(props.orderId);
+		return () => {
+			console.log('return block')
+		}
+	}, []);
+	
  	const handleClick = e => {
 		e.stopPropagation();
 		updatePG(id, 'assignee2', false)
  	}
-	
-	
 	
 	return (
 	 	<Button 
@@ -313,11 +297,9 @@ useEffect(() => {
 
 function KitchenButton(props){
 const [id, setId] = useState(0);
-//console.log(props.orderId)
 
 useEffect(() => {
 	setId(props.orderId);
-	console.log('setId: ' + id)
 	return () => {
 		console.log('return block')
 	}
@@ -393,7 +375,6 @@ function TakeawayStream(props) {
 function TableStream(props) {
 	var rows = [];
 	var orders = props.orders;
-//	console.log(orders);
 for (var i = 0; i < orders.length; i++) {
 	if(orders[i].tablenum.substring(0,5) == "Table") {
 			rows.push(<CardApp 
@@ -421,10 +402,9 @@ for (var i = 0; i < orders.length; i++) {
 
 function OrderItem(props) {
 var comment = "";
- if(props.comment != null) comment = "Comment: " +props.comment
+if(props.comment != null) comment = "Comment: " + props.comment;
 
 const [strikeClass, setStrikeClass] = useState("");
-
 const handleClick = e => {
 	if(strikeClass !== "crossed-line") setStrikeClass("crossed-line");
 	if(strikeClass === "crossed-line") setStrikeClass("");
@@ -432,20 +412,20 @@ const handleClick = e => {
  
  return (
 <div className={strikeClass} onClick={handleClick}>
-<Box m={1} borderBottom={1}>
-    <Typography variant="h5" align="center">
-		{props.itemName}
-    </Typography>
-	<Typography variant="subtitle2" align="center">
-		{props.variantName}
-    </Typography>
-	<Typography variant="h6" color="textSecondary" align="center">
-		Qty: {props.qty}
-	</Typography>
-		<Typography variant="subtitle1" color="textSecondary" align="center">
-		{comment}
-	</Typography>
-</Box>
+	<Box m={1} borderBottom={1}>
+	    <Typography variant="h5" align="center">
+			{props.itemName}
+	    </Typography>
+		<Typography variant="subtitle2" align="center">
+			{props.variantName}
+	    </Typography>
+		<Typography variant="h6" color="textSecondary" align="center">
+			Qty: {props.qty}
+		</Typography>
+			<Typography variant="subtitle1" color="textSecondary" align="center">
+			{comment}
+		</Typography>
+	</Box>
 </div>
   );
 }
@@ -465,15 +445,6 @@ function OrderItems(props) {
 		{rows}
 	</div>
   );
-}
-
-function cardTimer(createdTime) {
-	var timeNow = Date.now();
-	var timeOpen = timeNow - createdTime;
-	timeOpen = new Date(timeOpen);
-	
-	var timeOpenStr = timeOpen.getMinutes() + "m " + timeOpen.getSeconds()+"s"
-	return (timeOpenStr);
 }
 
 function updatePG(id, column, value) {
@@ -496,35 +467,34 @@ function updatePG(id, column, value) {
 }
 
 export default function App() {
-const socket = io();	
-const [orderData, setOrderData] = useState(0);
-
-useEffect(() => {
-	console.log('starting socketio...')
-	socket.on('connect', function(data) {
-		socket.emit('join', 'Hello World from react client');
-	});
+	const socket = io();	
+	const [orderData, setOrderData] = useState(0);
 	
-	socket.on('load', function(data) {
-		console.log("loading data...");
-		setOrderData(data.db);
-	});
-	
-	socket.on('db', function(data) {
-		console.log("getting data for react...");
-		setOrderData(data.db)
-	});
-	
-	return () => {
-		console.log('stop socket')
-		socket.removeAllListeners();
-		socket.off('db');
-		socket.off('load');
-	}
-}, []);
+	useEffect(() => {
+		console.log('starting socketio...')
+		socket.on('connect', function(data) {
+			socket.emit('join', 'Hello World from react client');
+		});
+		
+		socket.on('load', function(data) {
+			console.log("loading data...");
+			setOrderData(data.db);
+		});
+		
+		socket.on('db', function(data) {
+			console.log("getting data for react...");
+			setOrderData(data.db)
+		});
+		
+		return () => {
+			console.log('stop socket')
+			socket.removeAllListeners();
+			socket.off('db');
+			socket.off('load');
+		}
+	}, []);
 return (
   <div style={{ margin: 0, }}>
-
   	 <ButtonAppBar/>
 		<Container className="App_Contents" maxWidth="lg">
 			<Grid container spacing={3}>
