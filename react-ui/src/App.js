@@ -34,7 +34,7 @@ import $ from 'jquery';
 import "./styles.css";
 
 
-const initialState = { count: 1 };
+const initialState = { count: 10};
 const { useGlobalState, setGlobalState } = createGlobalState(initialState);
 
 
