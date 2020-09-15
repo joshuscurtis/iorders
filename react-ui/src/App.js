@@ -256,7 +256,7 @@ function CardApp(props) {
 
   return (
       <div className={alert}>
-		<Card className="OrderCard__Main" onClick={handleClick} style={{backgroundColor: props.isprocessing ? '#f0ad4e' : '#5cb85c',}} variant="outlined">
+		<Card className="OrderCard__Main" onClick={handleClick} style={{backgroundColor: props.isprocessing ? '#808080' : '#5cb85c',}} variant="outlined">
 			<CardHeader	
 				title={cardTitle}
 				subheader={timer}

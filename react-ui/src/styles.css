@@ -31,6 +31,7 @@
 
 .AppBar__main {
 	justify-content:space-between;
+	background-color: #808080;
 }
 
 .App__settings{
