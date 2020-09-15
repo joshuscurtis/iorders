@@ -211,6 +211,7 @@ function CardApp(props) {
 		useEffect(() => {
 			if(checkAlert(props.time, count)) setAlert("flash");
 			console.log("count "+count);
+			console.log("alterer "+alerter.Alert);
 		},[]);
 		
 	//calc time
