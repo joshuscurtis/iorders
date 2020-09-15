@@ -228,6 +228,7 @@ function CardApp(props) {
 	const [id, setId] = useState(props.orderid);
 	useEffect(() => {
 		setClose(false)
+		setId(props.orderid);
 		console.log('setId: ' + id)
 		return () => {
 			setTimer("null");
@@ -248,7 +249,7 @@ function CardApp(props) {
 			<CardHeader	
 				title={cardTitle}
 				subheader={timer}
-				action={<AlertDialog close={close} id ={id}/>}>
+				action={<AlertDialog close={close} id ={props.orderid}/>}>
 			</CardHeader>
 			<CardContent>
 				<OrderItems order={props.order} />
