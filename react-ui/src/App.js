@@ -225,10 +225,9 @@ function CardApp(props) {
 	}
 
 	//set order id	
-	const [id, setId] = useState(0);
+	const [id, setId] = useState(props.orderid);
 	useEffect(() => {
 		setClose(false)
-		setId(props.orderid);
 		console.log('setId: ' + id)
 		return () => {
 			setTimer("null");
