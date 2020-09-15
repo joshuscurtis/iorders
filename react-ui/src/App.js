@@ -63,7 +63,7 @@ const alertTimeContext = React.createContext(alertTime)
 	const handleChange = (event, newValue) => {
 		setCount(newValue)
 		console.log(count);
-		setGlobalState('count', count);
+		setGlobalState('count', newValue);
 	};
 
 	
