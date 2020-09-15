@@ -61,10 +61,8 @@ const alertTimeContext = React.createContext(alertTime)
 	}
 	const [count, setCount] = useGlobalState('count');
 	const handleChange = (event, newValue) => {
-	    setAlertValue(newValue);
 		setCount(newValue)
 		console.log(count);
-		console.log(settings)
 	};
 
 	
@@ -89,7 +87,7 @@ return (
 				Time before alert:
             </DialogContentText>
 			 <Slider
-		        defaultValue={alertValue}
+		        defaultValue={count}
 		        getAriaValueText={valuetext}
 		        aria-labelledby="discrete-slider"
 		        valueLabelDisplay="auto"
@@ -97,7 +95,7 @@ return (
 		        min={1}
 		        max={30}
 				onChange={handleChange}
-				value={alertValue}
+				value={count}
 				/>
 		    <DialogContentText id="alert-dialog-description">
 		    </DialogContentText>
@@ -127,13 +125,14 @@ return (
 
 
 function checkAlert(createdTime, alertAfter) {
-
+	const [count, setCount] = useGlobalState('count');
 	
 	var timeNow = Date.now();
 	var timeOpen = timeNow - createdTime;
 	timeOpen = new Date(timeOpen);
 	timeOpen = timeOpen/1000
-	if(timeOpen > alertAfter) return true
+	console.log(count)
+	if(timeOpen > count*60) return true
 	else return false
 }
 
