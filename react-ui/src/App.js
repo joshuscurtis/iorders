@@ -187,7 +187,7 @@ function CardApp(props) {
 	const [timer, setTimer] = useState("null");
 	const [alert, setAlert] = useState("");
 	const [count, setCount] = useGlobalState('count');
-
+	
 	//calc time
 	function timeCalc(createdTime) {
 		const timeNow = Date.now();
@@ -242,7 +242,6 @@ function CardApp(props) {
 		setTimer(timeCalc(props.time));
 		e.stopPropagation();
 	}
-	if(props.isclosed === true ) return (null)
 
   return (
       <div className={alert}>
@@ -346,7 +345,7 @@ function TakeawayStream(props) {
 	
 //	console.log(orders);
 	for (var i = 0; i < orders.length; i++) {
-		if(orders[i].tablenum.substring(0,5) != "Table" && orders[i].isclosed === false ) {
+		if(orders[i].tablenum.substring(0,5) != "Table") {
     		rows.push(<CardApp 
 						orderid={orders[i].order_id}
 						order={orders[i]} 
@@ -375,7 +374,7 @@ function TableStream(props) {
 	var rows = [];
 	var orders = props.orders;
 for (var i = 0; i < orders.length; i++) {
-	if(orders[i].tablenum.substring(0,5) == "Table" && orders[i].isclosed === false) {
+	if(orders[i].tablenum.substring(0,5) == "Table") {
 			rows.push(<CardApp 
 					orderid={orders[i].order_id}
 					order={orders[i]} 
