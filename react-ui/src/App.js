@@ -2,6 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import ReactDOM from "react-dom";
 
 import { createGlobalState } from 'react-hooks-global-state';
+import {SettingsProvider} from './SettingsContext';
+import {SettingsContext} from './SettingsContext';
+
 
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -41,7 +44,7 @@ const alertTimeContext = React.createContext(alertTime)
  function SettingsDialog(props) {
 	const [open, setOpen] = React.useState(false);
 	const [alertValue, setAlertValue] = React.useState(10);
-
+	const settings = useContext(SettingsContext)
 	
 	const handleClickOpen = e => {
 		e.stopPropagation();
@@ -60,6 +63,7 @@ const alertTimeContext = React.createContext(alertTime)
 	    setAlertValue(newValue);
 		setCount(newValue)
 		console.log(count);
+		console.log(settings)
 	};
 
 	
@@ -522,6 +526,7 @@ useEffect(() => {
 }, []);
 return (
   <div style={{ margin: 0, }}>
+  <SettingsProvider>
   <alertTimeContext.Provider value={alertTime}>
   	 <ButtonAppBar/>
 		<Container className="App_Contents" maxWidth="lg">
@@ -537,6 +542,7 @@ return (
 			</Grid>
   		</Container>
 		</alertTimeContext.Provider>
+		</SettingsProvider>
 	</div>
   );}
 
