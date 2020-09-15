@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import ReactDOM from "react-dom";
 
 import { createGlobalState } from 'react-hooks-global-state';
@@ -193,14 +193,13 @@ function CardApp(props) {
 	const [timer, setTimer] = useState("null");
 	const [alert, setAlert] = useState("");
 	const [count, setCount] = useGlobalState('count');
-	
+	const ref = useRef(timer);
 	//calc time
 	useEffect(() => {
-		setTimer(timeCalc(props.time));
+		setTimer(ref.current);
 		if(checkAlert(props.time, count)) setAlert("flash");
 		const interval = setInterval(() => {
-			setTimer(timeCalc(props.time));
-			console.log(timeCalc(props.time))
+			setTimer(ref.current);
 		}, 1000);
 		return () => {
 			setTimer(timeCalc(props.time));
