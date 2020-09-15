@@ -191,7 +191,7 @@ function CardApp(props) {
 	//calc time
 	function timeCalc(createdTime) {
 		const timeNow = Date.now();
-		const timeOpen = timeNow - createdTime;
+		let timeOpen = timeNow - createdTime;
 		let timeOpen = new Date(timeOpen);
 		const timeOpenStr = timeOpen.getMinutes() + "m " + timeOpen.getSeconds()+"s"
 	return (timeOpenStr);
