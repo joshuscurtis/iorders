@@ -523,7 +523,7 @@ useEffect(() => {
 }, []);
 return (
   <div style={{ margin: 0, }}>
-  <SettingsProvider>
+
   	 <ButtonAppBar/>
 		<Container className="App_Contents" maxWidth="lg">
 			<Grid container spacing={3}>
@@ -537,7 +537,6 @@ return (
 			  	</Grid>
 			</Grid>
   		</Container>
-		</SettingsProvider>
 	</div>
   );}
 
