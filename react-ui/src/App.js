@@ -203,6 +203,7 @@ function CardApp(props) {
 			setTimer(timeCalc(props.time));
 		}, 1000);
 		return () => {
+			setTimer("null");
 			clearInterval(interval);
 			console.log("unmount timer")
 		}
@@ -230,6 +231,7 @@ function CardApp(props) {
 		setId(props.orderid);
 		console.log('setId: ' + id)
 		return () => {
+			setTimer("null");
 			console.log('return block')
 		}
 	}, []);
@@ -269,7 +271,7 @@ function BarButton(props){
 	useEffect(() => {
 		setId(props.orderId);
 		return () => {
-			console.log('return block')
+			console.log('return button block')
 		}
 	}, []);
 	
@@ -298,7 +300,7 @@ const [id, setId] = useState(0);
 useEffect(() => {
 	setId(props.orderId);
 	return () => {
-		console.log('return block')
+		console.log('return button block')
 	}
 }, []);
 
