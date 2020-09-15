@@ -205,11 +205,12 @@ function CardApp(props) {
 		const [timer, setTimer] = useState(timeCalc(props.time));
 		const [alert, setAlert] = useState("");
 		const alerter = useContext(alertTimeContext);
-		const [count, setCount] = useGlobalState('count');
+		
 		
 
 	//calc time
 	useEffect(() => {
+		const [count, setCount] = useGlobalState('count');
 		const interval = setInterval(() => {
 			setTimer(timeCalc(props.time));
 			console.log("count "+count);
