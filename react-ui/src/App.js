@@ -38,7 +38,6 @@ const { useGlobalState, setGlobalState } = createGlobalState(initialState);
  function SettingsDialog(props) {
 	const [open, setOpen] = React.useState(false);
 	const [alertValue, setAlertValue] = React.useState(10);
-	const settings = useContext(SettingsContext)
 	
 	const handleClickOpen = e => {
 		e.stopPropagation();
@@ -55,7 +54,6 @@ const { useGlobalState, setGlobalState } = createGlobalState(initialState);
 	const [count, setCount] = useGlobalState('count');
 	const handleChange = (event, newValue) => {
 		setCount(newValue)
-		console.log(count);
 		setGlobalState('count', newValue);
 	};
 
