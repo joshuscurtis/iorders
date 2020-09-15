@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import ReactDOM from "react-dom";
 
 import { createGlobalState } from 'react-hooks-global-state';
+
 import {SettingsProvider} from './SettingsContext';
 import {SettingsContext} from './SettingsContext';
 
@@ -527,7 +528,6 @@ useEffect(() => {
 return (
   <div style={{ margin: 0, }}>
   <SettingsProvider>
-  <alertTimeContext.Provider value={alertTime}>
   	 <ButtonAppBar/>
 		<Container className="App_Contents" maxWidth="lg">
 			<Grid container spacing={3}>
@@ -541,7 +541,6 @@ return (
 			  	</Grid>
 			</Grid>
   		</Container>
-		</alertTimeContext.Provider>
 		</SettingsProvider>
 	</div>
   );}
