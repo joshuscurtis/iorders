@@ -35,7 +35,7 @@ import "./styles.css";
 
 
 const initialState = { count: 0 };
-const { useGlobalState } = createGlobalState(initialState);
+const { useGlobalState, setGlobalState } = createGlobalState(initialState);
 
 
 const alertTime = { Alert: 60 }
@@ -63,6 +63,7 @@ const alertTimeContext = React.createContext(alertTime)
 	const handleChange = (event, newValue) => {
 		setCount(newValue)
 		console.log(count);
+		setGlobalState('count', count);
 	};
 
 	
