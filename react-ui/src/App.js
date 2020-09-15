@@ -346,7 +346,7 @@ function TakeawayStream(props) {
 	
 //	console.log(orders);
 	for (var i = 0; i < orders.length; i++) {
-		if(orders[i].tablenum.substring(0,5) != "Table") {
+		if(orders[i].tablenum.substring(0,5) != "Table" && orders[i].isclosed === false ) {
     		rows.push(<CardApp 
 						orderid={orders[i].order_id}
 						order={orders[i]} 
@@ -375,7 +375,7 @@ function TableStream(props) {
 	var rows = [];
 	var orders = props.orders;
 for (var i = 0; i < orders.length; i++) {
-	if(orders[i].tablenum.substring(0,5) == "Table") {
+	if(orders[i].tablenum.substring(0,5) == "Table" && orders[i].isclosed === false) {
 			rows.push(<CardApp 
 					orderid={orders[i].order_id}
 					order={orders[i]} 
