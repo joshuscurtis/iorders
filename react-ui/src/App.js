@@ -342,7 +342,7 @@ function TakeawayStream(props) {
     		rows.push(<CardApp 
 						orderid={orders[i].order_id}
 						order={orders[i]} 
-						time={orders[i].time}
+						time={orders[i].timeOpen}
 						isprocessing={orders[i].isprocessing}
 						istable={orders[i].istable}
 						isnew={orders[i].isnew}
@@ -371,7 +371,7 @@ for (var i = 0; i < orders.length; i++) {
 			rows.push(<CardApp 
 					orderid={orders[i].order_id}
 					order={orders[i]} 
-					time={"inDev"}
+					time={orders[i].timeOpen}
 					isprocessing={orders[i].isprocessing}
 					istable={orders[i].istable}
 					isnew={orders[i].isnew}
