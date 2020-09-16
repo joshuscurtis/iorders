@@ -233,7 +233,6 @@ function CardApp(props) {
 	//onClick action
  	const handleClick = e => {
 		if(props.isprocessing === false) updatePG(props.orderid, 'isprocessing', true);
-		setTimer(timeCalc(props.time));
 		e.stopPropagation();
 	}
 
@@ -243,7 +242,7 @@ function CardApp(props) {
 			<CardHeader	
 				title={cardTitle}
 				subheader={props.time}
-				action={<AlertDialog close={close} id ={props.orderid}/>}>
+				action={<AlertDialog id ={props.orderid}/>}>
 			</CardHeader>
 			<CardContent>
 				<OrderItems order={props.order} />
