@@ -185,13 +185,34 @@ setInterval(function(){
 }, 5000)
 
 
-function timeCalc(createdTime) {
+function timeDiffStr(createdTime) {
 		const timeNow = Date.now();
 		let timeOpen2 = timeNow - createdTime;
 		let timeOpen = new Date(timeOpen2);
 		const timeOpenStr = timeOpen.getMinutes() + "m " + timeOpen.getSeconds()+"s"
 	return (timeOpenStr);
 }
+
+
+function() setOrderTimeDiff(){
+	var orders;
+	pool.query('select * from devorders where order_id in (SELECT order_id FROM devorders order BY order_id DESC LIMIT 20) AND isclosed = false ORDER BY order_id asc;', (err, res) => {
+			orders = res.rows
+	})
+	
+	for (var i = 0; i < orders.length(); i++) {
+		timeString = timeDiffStr(orders[i].time);
+		pool.query('
+		"UPDATE devorders SET timeOpen = '"+timeString+"' WHERE order_id = "+ orders[i].order_id+";", (err, res) => {
+		})
+	}
+}
+
+
+
+setInterval(function() {
+	setOrderTimeDiff()
+}, 1000)
 
 
 //every 5seconds
@@ -220,7 +241,8 @@ setInterval(function() {
             if (error) throw new Error(error);
             auth1 = response.body;
             auth1 = JSON.parse(auth1);
-			
+	
+				
 		//send to pg
 		var thisQuery = "INSERT INTO public.devorders (order_id, products, istable, isnew, isclosed, isprocessing, time, tablenum) VALUES ("+auth1.purchases[0].globalPurchaseNumber+", '" +JSON.stringify(auth1.purchases[0].products)+"',"+doesOrderContainTable(auth1.purchases[0].products)+", "+true+", "+false+", "+false+", "+theTime+",'"+getTableNum(auth1.purchases[0].products)+"');"
 		
