@@ -197,15 +197,14 @@ function timeDiffStr(createdTime) {
 function setOrderTimeDiff(){
 	var orders;
 	pool.query('select * from devorders where order_id in (SELECT order_id FROM devorders order BY order_id DESC LIMIT 20) AND isclosed = false ORDER BY order_id asc;', (err, res) => {
-			orders = res.rows
-	})
-	
-	for (var i = 0; i < orders.length(); i++) {
-		timeString = timeDiffStr(orders[i].time);
-		pool.query(
-		"UPDATE devorders SET timeOpen = '"+timeString+"' WHERE order_id = "+ orders[i].order_id+";", (err, res) => {
-		})
-	}
+		orders = res.rows
+		for (var i = 0; i < orders.length(); i++) {
+			timeString = timeDiffStr(orders[i].time);
+			pool.query(
+			"UPDATE devorders SET timeOpen = '"+timeString+"' WHERE order_id = "+ orders[i].order_id+";", (err, res) => {
+			})
+		}
+})
 }
 
 
