@@ -258,18 +258,10 @@ function CardApp(props) {
 }
 
 function BarButton(props){
-	const [id, setId] = useState(0);
-
-	useEffect(() => {
-		setId(props.orderId);
-		return () => {
-			console.log('return button block')
-		}
-	}, []);
 	
  	const handleClick = e => {
 		e.stopPropagation();
-		updatePG(id, 'assignee2', false)
+		updatePG(props.orderId, 'assignee2', false)
  	}
 	
 	return (
@@ -287,18 +279,10 @@ function BarButton(props){
 }
 
 function KitchenButton(props){
-const [id, setId] = useState(0);
-
-useEffect(() => {
-	setId(props.orderId);
-	return () => {
-		console.log('return button block')
-	}
-}, []);
 
 	const handleClick = e => {
 		e.stopPropagation();
-		updatePG(id, 'assignee', false)
+		updatePG(props.orderId, 'assignee', false)
  	}
 	
 	return (
