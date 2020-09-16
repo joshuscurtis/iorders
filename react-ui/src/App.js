@@ -178,14 +178,6 @@ return (
   );
 }
 
-function timeCalc(createdTime) {
-		const timeNow = Date.now();
-		let timeOpen2 = timeNow - createdTime;
-		let timeOpen = new Date(timeOpen2);
-		const timeOpenStr = timeOpen.getMinutes() + "m " + timeOpen.getSeconds()+"s"
-	return (timeOpenStr);
-}
-
 function CardApp(props) {
 	//do not create closed orders
 	//set states
@@ -374,27 +366,13 @@ function TakeawayStream(props) {
 function TableStream(props) {
 	var rows = [];
 	var orders = props.orders;
-	
-	
-		
-const [timeOpen, setTimeOpen] = useState(0); 
-for (var i = 0; i < orders.length; i++) {
 
-	useEffect(() => {
-		setTimeOpen("none")
-		const interval = setInterval(() => {
-			setTimeOpen(timeCalc(orders[i].time))
-		}, 1000);
-	return () => {
-		console.log('return time block')
-	}
-	}, []);
-	
+for (var i = 0; i < orders.length; i++) {
 	if(orders[i].tablenum.substring(0,5) == "Table") {
 			rows.push(<CardApp 
 					orderid={orders[i].order_id}
 					order={orders[i]} 
-					time={timeOpen}
+					time={"inDev"}
 					isprocessing={orders[i].isprocessing}
 					istable={orders[i].istable}
 					isnew={orders[i].isnew}

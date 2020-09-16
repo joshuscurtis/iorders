@@ -185,6 +185,15 @@ setInterval(function(){
 }, 5000)
 
 
+function timeCalc(createdTime) {
+		const timeNow = Date.now();
+		let timeOpen2 = timeNow - createdTime;
+		let timeOpen = new Date(timeOpen2);
+		const timeOpenStr = timeOpen.getMinutes() + "m " + timeOpen.getSeconds()+"s"
+	return (timeOpenStr);
+}
+
+
 //every 5seconds
 setInterval(function() {
 	
