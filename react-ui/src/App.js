@@ -178,7 +178,13 @@ return (
   );
 }
 
-
+function timeCalc(createdTime) {
+		const timeNow = Date.now();
+		let timeOpen2 = timeNow - createdTime;
+		let timeOpen = new Date(timeOpen2);
+		const timeOpenStr = timeOpen.getMinutes() + "m " + timeOpen.getSeconds()+"s"
+	return (timeOpenStr);
+}
 
 function CardApp(props) {
 	//do not create closed orders
@@ -190,25 +196,19 @@ function CardApp(props) {
 	const [count, setCount] = useGlobalState('count');
 	
 	//calc time
-	function timeCalc(createdTime) {
-		const timeNow = Date.now();
-		let timeOpen2 = timeNow - createdTime;
-		let timeOpen = new Date(timeOpen2);
-		const timeOpenStr = timeOpen.getMinutes() + "m " + timeOpen.getSeconds()+"s"
-	return (timeOpenStr);
-	}
 	
-	useEffect(() => {
-		if(checkAlert(props.time, count)) setAlert("flash");
-		const interval = setInterval(() => {
-			setTimer(timeCalc(props.time));
-		}, 1000);
-		return () => {
-			setTimer("null");
-			clearInterval(interval);
-			console.log("unmount timer")
-		}
-		},[]);
+	
+	// useEffect(() => {
+	// 	if(checkAlert(props.time, count)) setAlert("flash");
+	// 	const interval = setInterval(() => {
+	// 		setTimer(timeCalc(props.time));
+	// 	}, 1000);
+	// 	return () => {
+	// 		setTimer("null");
+	// 		clearInterval(interval);
+	// 		console.log("unmount timer")
+	// 	}
+	// 	},[]);
 	
 	//default button colours
 	var kitCol = false;
@@ -240,7 +240,7 @@ function CardApp(props) {
 	
 	//onClick action
  	const handleClick = e => {
-		if(props.isprocessing === false) updatePG(id, 'isprocessing', true);
+		if(props.isprocessing === false) updatePG(props.orderid, 'isprocessing', true);
 		setTimer(timeCalc(props.time));
 		e.stopPropagation();
 	}
@@ -250,7 +250,7 @@ function CardApp(props) {
 		<Card className="OrderCard__Main" onClick={handleClick} style={{backgroundColor: props.isprocessing ? '#7ea8be' : '#66e559',}} variant="outlined">
 			<CardHeader	
 				title={cardTitle}
-				subheader={timer}
+				subheader={props.time}
 				action={<AlertDialog close={close} id ={props.orderid}/>}>
 			</CardHeader>
 			<CardContent>
@@ -371,16 +371,30 @@ function TakeawayStream(props) {
   );
 }
 
-
 function TableStream(props) {
 	var rows = [];
 	var orders = props.orders;
+	
+	
+		
+const [timeOpen, setTimeOpen] = useState(0); 
 for (var i = 0; i < orders.length; i++) {
+
+	useEffect(() => {
+		setTimeOpen("none")
+		const interval = setInterval(() => {
+			setTimeOpen(timeCalc(orders[i].time))
+		}, 1000);
+	return () => {
+		console.log('return time block')
+	}
+	}, []);
+	
 	if(orders[i].tablenum.substring(0,5) == "Table") {
 			rows.push(<CardApp 
 					orderid={orders[i].order_id}
 					order={orders[i]} 
-					time={orders[i].time}
+					time={timeOpen}
 					isprocessing={orders[i].isprocessing}
 					istable={orders[i].istable}
 					isnew={orders[i].isnew}
