@@ -183,7 +183,8 @@ return (
 function CardApp(props) {
 	//do not create closed orders
 	//set states
-	const [close, setClose] = useState(false);
+	// const [close, setClose] = useState(false);
+	
 	const [timer, setTimer] = useState("null");
 	const [alert, setAlert] = useState("");
 	const [count, setCount] = useGlobalState('count');
@@ -197,7 +198,6 @@ function CardApp(props) {
 	return (timeOpenStr);
 	}
 	
-
 	useEffect(() => {
 		if(checkAlert(props.time, count)) setAlert("flash");
 		const interval = setInterval(() => {
@@ -225,17 +225,18 @@ function CardApp(props) {
 		cardTitle = "Order: " + (props.orderid%99+1);
 	}
 
-	//set order id	
-	const [id, setId] = useState(props.orderid);
-	useEffect(() => {
-		setClose(false)
-		setId(props.orderid);
-		console.log('setId: ' + id)
-		return () => {
-			setTimer("null");
-			console.log('return block')
-		}
-	}, []);
+
+	// //set order id	
+	// const [id, setId] = useState(props.orderid);
+	// useEffect(() => {
+	// 	setClose(false)
+	// 	setId(props.orderid);
+	// 	console.log('setId: ' + id)
+	// 	return () => {
+	// 		setTimer("null");
+	// 		console.log('return block')
+	// 	}
+	// }, []);
 	
 	//onClick action
  	const handleClick = e => {
