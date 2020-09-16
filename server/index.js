@@ -194,7 +194,7 @@ function timeDiffStr(createdTime) {
 }
 
 
-function() setOrderTimeDiff(){
+function setOrderTimeDiff(){
 	var orders;
 	pool.query('select * from devorders where order_id in (SELECT order_id FROM devorders order BY order_id DESC LIMIT 20) AND isclosed = false ORDER BY order_id asc;', (err, res) => {
 			orders = res.rows
