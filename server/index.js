@@ -201,10 +201,11 @@ function setOrderTimeDiff(){
 		console.log(orders)
 		for (var i = 0; i < orders.length; i++) {
 			timeString = timeDiffStr(orders[i].time);
-			
-			query = "UPDATE devorders SET \"timeOpen\" = '"+timeString+"' WHERE order_id = "+ orders[i].order_id+";"
-			pool.query(query, (err, res) => {
-				console.log(query);
+			if(orders[i].isclosed === false){
+				query = "UPDATE devorders SET \"timeOpen\" = '"+timeString+"' WHERE order_id = "+ orders[i].order_id+";"
+				pool.query(query, (err, res) => {
+					console.log(query);
+			}
 			})
 		}
 })
