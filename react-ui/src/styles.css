@@ -33,9 +33,9 @@
 
 .AppBar__main {
 	justify-content:space-between;
-	background-color: #28536b;
+	background-color: #2F4858;
 }
-
+/*#28536b*/
 .App__settings{
  	margin-left: auto;
  	order: 2;
