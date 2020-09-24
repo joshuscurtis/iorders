@@ -33,7 +33,7 @@ import "./styles.css";
 const initialState = { count: 10};
 const initData = { data: 0};
 const { useGlobalState, setGlobalState } = createGlobalState(initialState);
-const { useData, setData } = createGlobalState(initialState);
+const { useData, setData } = createGlobalState(initData);
 
 const socket = io();	
 
