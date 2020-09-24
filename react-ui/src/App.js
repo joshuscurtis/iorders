@@ -479,14 +479,6 @@ export default function App() {
 		}
 	}, []);
 	
-	useEffect(() => {
-		console.log("cleaning up...");
-		socket.close();
-		});
-	return () => {
-		socket.close();
-		}
-	}, []);
 	
 return (
   <div style={{ margin: 0, }}>
