@@ -31,33 +31,9 @@ import "./styles.css";
 
 
 const initialState = { count: 10};
-const initData = { data: 0};
+const initData = { data: 10};
 const { useGlobalState, setGlobalState } = createGlobalState(initialState);
-const { useData, setData } = createGlobalState(initData);
-
-const socket = io();	
-
-
-console.log('starting socketio...')
-socket.on('connect', function(data) {
-	socket.emit('join', 'Hello World from react client');
-});
-	
-socket.on('load', function(data) {
-	console.log("loading data...");
-	setData('data', data.db);
-});
-	
-socket.on('db', function(data) {
-	console.log("getting data for react...");
-	console.log(data.db);
-	setData('data', data.db);
-});
-
-
-
-
-
+const { useData, setData } = createGlobalState(initialState);
 
 
  function SettingsDialog(props) {
@@ -467,34 +443,50 @@ function updatePG(id, column, value) {
 }
 
 export default function App() {
-
-	// const [orderData, setOrderData] = useState(0);
-	// const data = useData('data')
+	const socket = io();	
+	const [orderData, setOrderData] = useState(0);
+	var socketData;
 	
-	// useEffect(() => {
-
-	// 	console.log("setting data for react...");
-	// 	setInterval(function() {
-	// 	setOrderData(data)
-	// 	}, 1000)
+	console.log('starting socketio...')
+	socket.on('connect', function(data) {
+		socket.emit('join', 'Hello World from react client');
+	});
 		
-	// 	return () => {
-	// 		console.log('stop socket')
-	// 		socket.removeAllListeners();
-	// 		socket.off('db');
-	// 		socket.off('load');
-	// 	}
-	// }, []);
+	socket.on('load', function(data) {
+		console.log("loading data...");
+		socketData = data.db;
+	});
+		
+	socket.on('db', function(data) {
+		console.log("getting data for react...");
+		console.log(data.db);
+		socketData = data.db;
+	});
+	
+	useEffect(() => {
+		setOrderData(socketData)
+		console.log("setting data for react...");
+		setInterval(function() {
+		setData('data', socketData);
+		setOrderData(useData('data'))
+		}, 1000)
+		
+		return () => {
+			console.log('stop socket')
+			socket.removeAllListeners();
+			socket.close()
+		}
+	}, []);
 return (
   <div style={{ margin: 0, }}>
   	 <ButtonAppBar/>
 		<Container className="App_Contents" maxWidth="lg">
 			<Grid container spacing={3}>
 		        <Grid item xs={6} spacing={3}>
-					<TakeawayStream orders={useData('data')}/>
+					<TakeawayStream orders={orderData}/>
 		        </Grid>
 		        <Grid item xs={6} spacing={3}>
-					<TableStream orders={useData('data')}/>
+					<TableStream orders={orderData}/>
 		        </Grid>
 				<Grid item xs={12}>
 			  	</Grid>
