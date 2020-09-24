@@ -446,6 +446,13 @@ function updatePG(id, column, value) {
 export default function App() {
 	const socket = io();	
 	const [orderData, setOrderData] = useState(0);
+	var socketData;
+	
+	socket.on('db', function(data) {
+		console.log("getting data for react...");
+		socketData = data.db;
+	});
+	
 	
 	useEffect(() => {
 		console.log('starting socketio...')
@@ -457,11 +464,9 @@ export default function App() {
 			console.log("loading data...");
 			setOrderData(data.db);
 		});
-		
-		socket.on('db', function(data) {
-			console.log("getting data for react...");
-			setOrderData(data.db)
-		});
+
+		console.log("setting data for react...");
+		setOrderData(socketData)
 		
 		return () => {
 			console.log('stop socket')
