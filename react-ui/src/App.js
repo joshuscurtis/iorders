@@ -446,29 +446,38 @@ export default function App() {
 	const socket = io();	
 	const [orderData, setOrderData] = useState(0);
 	
-	useEffect(() => {
-			console.log('starting socketio...')
+	console.log('starting socketio...')
 	socket.on('connect', function(data) {
 		socket.emit('join', 'Hello World from react client');
 	});
+	
+	useEffect(() => {
+		socket.on('load', function(data) {
+			console.log("loading data...");
+			setOrderData(data.db);
+		});
 		
-	socket.on('load', function(data) {
-		console.log("loading data...");
-		setOrderData(data.db);
-	});
-		
-	socket.on('db', function(data) {
-		console.log("getting data for react...");
-		console.log(data.db);
-		setOrderData(data.db);
-	});
-		
-		return () => {
+	return () => {
 			console.log('stop socket')
 			socket.removeAllListeners();
 			socket.close()
 		}
 	}, []);
+	
+	useEffect(() => {
+		socket.on('db', function(data) {
+			console.log("getting data for react...");
+			console.log(data.db);
+			setOrderData(data.db);
+		});
+	return () => {
+			console.log('stop socket')
+			socket.removeAllListeners();
+			socket.close()
+		}
+	}, []);
+	
+	
 return (
   <div style={{ margin: 0, }}>
   	 <ButtonAppBar/>
