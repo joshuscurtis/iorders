@@ -468,33 +468,33 @@ function updatePG(id, column, value) {
 
 export default function App() {
 
-	const [orderData, setOrderData] = useState(0);
-	data = useData('data')
+	// const [orderData, setOrderData] = useState(0);
+	// const data = useData('data')
 	
-	useEffect(() => {
-		setOrderData(data)
-		console.log("setting data for react...");
-		setInterval(function() {
-		setOrderData(data)
-		}, 1000)
+	// useEffect(() => {
+
+	// 	console.log("setting data for react...");
+	// 	setInterval(function() {
+	// 	setOrderData(data)
+	// 	}, 1000)
 		
-		return () => {
-			console.log('stop socket')
-			socket.removeAllListeners();
-			socket.off('db');
-			socket.off('load');
-		}
-	}, []);
+	// 	return () => {
+	// 		console.log('stop socket')
+	// 		socket.removeAllListeners();
+	// 		socket.off('db');
+	// 		socket.off('load');
+	// 	}
+	// }, []);
 return (
   <div style={{ margin: 0, }}>
   	 <ButtonAppBar/>
 		<Container className="App_Contents" maxWidth="lg">
 			<Grid container spacing={3}>
 		        <Grid item xs={6} spacing={3}>
-					<TakeawayStream orders={orderData}/>
+					<TakeawayStream orders={useData('data')}/>
 		        </Grid>
 		        <Grid item xs={6} spacing={3}>
-					<TableStream orders={orderData}/>
+					<TableStream orders={useData('data')}/>
 		        </Grid>
 				<Grid item xs={12}>
 			  	</Grid>
