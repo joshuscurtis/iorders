@@ -21,6 +21,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slider from '@material-ui/core/Slider';
 
+//icons
 import IconButton from '@material-ui/core/IconButton';
 import KitchenIcon from '@material-ui/icons/Kitchen';
 import LocalCafeIcon from '@material-ui/icons/LocalCafe';
@@ -78,9 +79,6 @@ return (
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description">
       <DialogTitle id="alert-dialog-title">{"General Settings"}</DialogTitle>
-	  <IconButton aria-label="delete">Test
-        <DeleteIcon />
-		</IconButton>
       <DialogContent>
      		<DialogContentText id="alert-dialog-description">
 				Time before alert (minutes):
