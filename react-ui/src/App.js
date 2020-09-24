@@ -157,8 +157,7 @@ function AlertDialog(props) {
 		
 return (
     <div>
-      <Button size="large" variant="contained" color="secondary" onClick={handleClickOpen}>
-		Close
+      <Button className="OrderCard__CloseButton" size="large" variant="contained" color="secondary" onClick={handleClickOpen}>
 	  	<CloseIcon />
       </Button>
       <Dialog

@@ -11,7 +11,10 @@
 	max-height: 70px;
 	min-height: auto;	
 }
-
+.OrderCard__CloseButton{
+	max-width: 50px;
+	float: right;
+}
 
 .OrderCard__Main {
 	box-shadow: 4px 4px 5px #333;
