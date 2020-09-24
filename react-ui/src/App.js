@@ -144,6 +144,7 @@ function AlertDialog(props) {
 	const handleClose = e => {
 		e.stopPropagation();
 	    setOpen(false);
+		socket.removeAllListeners();
 	};
 		
 return (
@@ -234,6 +235,7 @@ function CardApp(props) {
  	const handleClick = e => {
 		if(props.isprocessing === false) updatePG(props.orderid, 'isprocessing', true);
 		e.stopPropagation();
+		socket.removeAllListeners();
 	}
 
   return (
