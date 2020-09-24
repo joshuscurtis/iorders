@@ -481,13 +481,13 @@ export default function App() {
 	
 	useEffect(() => {
 		console.log("cleaning up...");
-					socket.close()
-	});
-		
+		socket.close();
+		});
 	return () => {
-			socket.close()
+		socket.close();
 		}
 	}, []);
+	
 return (
   <div style={{ margin: 0, }}>
   	 <ButtonAppBar/>
