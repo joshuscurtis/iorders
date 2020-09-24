@@ -442,14 +442,16 @@ function updatePG(id, column, value) {
 	});
 }
 
-export default function App() {
-	const socket = io();	
-	const [orderData, setOrderData] = useState(0);
-	
+
+const socket = io();	
 	console.log('starting socketio...')
-	socket.on('connect', function(data) {
-		socket.emit('join', 'Hello World from react client');
-	});
+socket.on('connect', function(data) {
+	socket.emit('join', 'Hello World from react client');
+});
+	
+export default function App() {
+
+	const [orderData, setOrderData] = useState(0);
 	
 	useEffect(() => {
 		socket.on('load', function(data) {
@@ -477,7 +479,15 @@ export default function App() {
 		}
 	}, []);
 	
-	
+	useEffect(() => {
+		console.log("cleaning up...");
+					socket.close()
+	});
+		
+	return () => {
+			socket.close()
+		}
+	}, []);
 return (
   <div style={{ margin: 0, }}>
   	 <ButtonAppBar/>
