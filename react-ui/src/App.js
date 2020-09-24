@@ -478,7 +478,14 @@ export default function App() {
 			socket.close()
 		}
 	}, []);
-	
+		useEffect(() => {
+		socket.on('db', function(data) {
+			console.log("cleaning up...");
+		});
+	return () => {
+			socket.close();
+		}
+	}, []);
 	
 return (
   <div style={{ margin: 0, }}>
