@@ -31,7 +31,32 @@ import "./styles.css";
 
 
 const initialState = { count: 10};
+const initData = { data: 0};
 const { useGlobalState, setGlobalState } = createGlobalState(initialState);
+const { useData, setData } = createGlobalState(initialState);
+
+const socket = io();	
+
+
+console.log('starting socketio...')
+socket.on('connect', function(data) {
+	socket.emit('join', 'Hello World from react client');
+});
+	
+socket.on('load', function(data) {
+	console.log("loading data...");
+	setData('data', data.db);
+});
+	
+socket.on('db', function(data) {
+	console.log("getting data for react...");
+	console.log(data.db);
+	setData('data', data.db);
+});
+
+
+
+
 
 
 
@@ -442,30 +467,15 @@ function updatePG(id, column, value) {
 }
 
 export default function App() {
-	const socket = io();	
+
 	const [orderData, setOrderData] = useState(0);
-	var socketData;
 	
-	console.log('starting socketio...')
-	socket.on('connect', function(data) {
-		socket.emit('join', 'Hello World from react client');
-	});
-		
-	socket.on('load', function(data) {
-		console.log("loading data...");
-		socketData = data.db;
-	});
-		
-	socket.on('db', function(data) {
-		console.log("getting data for react...");
-		console.log(data.db);
-		socketData = data.db;
-	});
 	
 	useEffect(() => {
+		setOrderData(useData('data'))
 		console.log("setting data for react...");
 		setInterval(function() {
-			setOrderData(socketData)
+		setOrderData(useData('data'))
 		}, 1000)
 		
 		return () => {
