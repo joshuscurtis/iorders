@@ -25,6 +25,8 @@ import Slider from '@material-ui/core/Slider';
 import IconButton from '@material-ui/core/IconButton';
 import KitchenIcon from '@material-ui/icons/Kitchen';
 import LocalCafeIcon from '@material-ui/icons/LocalCafe';
+import CloseIcon from '@material-ui/icons/Close';
+
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
@@ -113,7 +115,9 @@ return (
 		  		className="OrderCard__closeButton" 
 			    onClick={handleClose}
 		 	    color="primary"
-			    autoFocus>Close
+			    autoFocus>
+				<CloseIcon/>
+				Close
             </Button>
         </DialogActions>
 		
