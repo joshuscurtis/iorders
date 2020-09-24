@@ -469,13 +469,13 @@ function updatePG(id, column, value) {
 export default function App() {
 
 	const [orderData, setOrderData] = useState(0);
-	
+	data = useData('data')
 	
 	useEffect(() => {
-		setOrderData(useData('data'))
+		setOrderData(data)
 		console.log("setting data for react...");
 		setInterval(function() {
-		setOrderData(useData('data'))
+		setOrderData(data)
 		}, 1000)
 		
 		return () => {
