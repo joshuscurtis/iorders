@@ -22,8 +22,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slider from '@material-ui/core/Slider';
 
 import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-
+import KitchenIcon from '@material-ui/icons/Kitchen';
+import LocalCafeIcon from '@material-ui/icons/LocalCafe';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
@@ -280,6 +280,7 @@ function BarButton(props){
 			style={{backgroundColor: props.colour ? '#5cb85c' : '#f50057', 			color:'white'
 			}}
 		>
+		<LocalCafeIcon />
 		Bar
 		</Button>
 	);
@@ -301,6 +302,7 @@ function KitchenButton(props){
 				    }}
 			size="large"
 		>
+		<KitchenIcon />
 		Kitchen
 		</Button>
 		);
