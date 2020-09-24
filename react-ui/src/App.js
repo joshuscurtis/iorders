@@ -464,12 +464,11 @@ export default function App() {
 	});
 	
 	useEffect(() => {
-		setOrderData(socketData)
-		console.log("setting data for react...");
-		setInterval(function() {
-		setData('data', socketData);
-		setOrderData(useData('data'))
-		}, 1000)
+			setOrderData(socketData)
+			console.log("setting data for react...");
+			setInterval(function() {
+				setOrderData(socketData)
+			}, 1000)
 		
 		return () => {
 			console.log('stop socket')
