@@ -21,6 +21,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slider from '@material-ui/core/Slider';
 
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 
@@ -74,7 +78,9 @@ return (
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description">
       <DialogTitle id="alert-dialog-title">{"General Settings"}</DialogTitle>
-	  
+	  <IconButton aria-label="delete">Test
+        <DeleteIcon />
+		</IconButton>
       <DialogContent>
      		<DialogContentText id="alert-dialog-description">
 				Time before alert (minutes):
