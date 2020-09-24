@@ -159,6 +159,7 @@ return (
     <div>
       <Button size="large" variant="contained" color="secondary" onClick={handleClickOpen}>
 		Close
+	  	<CloseIcon />
       </Button>
       <Dialog
         open={open}
