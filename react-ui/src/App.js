@@ -464,7 +464,9 @@ export default function App() {
 	
 	useEffect(() => {
 		console.log("setting data for react...");
-		setOrderData(socketData)
+		setInterval(function() {
+			setOrderData(socketData)
+		}, 1000)
 		
 		return () => {
 			console.log('stop socket')

@@ -213,7 +213,7 @@ function setOrderTimeDiff(){
 
 setInterval(function() {
 	setOrderTimeDiff()
-}, 5000)
+}, 1000)
 
 
 //every 5seconds
