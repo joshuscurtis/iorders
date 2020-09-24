@@ -445,30 +445,23 @@ function updatePG(id, column, value) {
 export default function App() {
 	const socket = io();	
 	const [orderData, setOrderData] = useState(0);
-	var socketData;
 	
-	console.log('starting socketio...')
+	useEffect(() => {
+			console.log('starting socketio...')
 	socket.on('connect', function(data) {
 		socket.emit('join', 'Hello World from react client');
 	});
 		
 	socket.on('load', function(data) {
 		console.log("loading data...");
-		socketData = data.db;
+		setOrderData(data.db);
 	});
 		
 	socket.on('db', function(data) {
 		console.log("getting data for react...");
 		console.log(data.db);
-		socketData = data.db;
+		setOrderData(data.db);
 	});
-	
-	useEffect(() => {
-			setOrderData(socketData)
-			console.log("setting data for react...");
-			setInterval(function() {
-				setOrderData(socketData)
-			}, 1000)
 		
 		return () => {
 			console.log('stop socket')
