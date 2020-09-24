@@ -116,7 +116,7 @@ return (
 			    onClick={handleClose}
 		 	    color="primary"
 			    autoFocus>
-				<CloseIcon/>
+				<CloseIcon />
 				Close
             </Button>
         </DialogActions>
