@@ -466,9 +466,9 @@ app.post('/updateAvg', (req,res) => {
   });
   
 
-app.get('*', myAuth, function(request, response) {
-    response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
-  });
+// app.get('*', myAuth, function(request, response) {
+//     response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
+//   });
 	
 	
 //START SERVER
