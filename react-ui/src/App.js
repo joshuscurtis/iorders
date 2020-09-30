@@ -458,9 +458,11 @@ const socket = io();
 socket.on('connect', function(data) {
 	socket.emit('join', 'Hello World from react client');
 });
-	
-export default function App() {
+
 const audio = new Audio('https://github.com/joshuscurtis/theway/raw/master/piece-of-cake.mp3');
+
+export default function App() {
+
 
 	const [orderData, setOrderData] = useState(0);
 	
