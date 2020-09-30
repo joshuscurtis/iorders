@@ -49,6 +49,14 @@ const pool = new Pool({
 pool.connect()
 
 
+
+  app.use(basicAuth({
+    users: { 'someuser': 'somepassword' },
+    challenge: true,
+    realm: 'Imb4T3st4pp',
+	}))
+
+
 // Add headers
 app.use(function(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
@@ -319,6 +327,8 @@ basicAuth({
   });
 
 
+  
+  
 	
 	app.get('/orders/all', adminAuth , (req,result) => {
 		pool.query('SELECT * FROM public.devorders', (err, res) => {
@@ -461,12 +471,10 @@ app.post('/updateAvg', (req,res) => {
 	})
 	 
 // All remaining requests return the React app, so it can handle routing.
-  app.get('*', myAuth, (request, response) => {
-    response.redirect('/iorders')
-  });
+
   
 
- app.get('/iorders', myAuth, function(request, response) {
+ app.get('*', myAuth, function(request, response) {
      response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
    });
 	
