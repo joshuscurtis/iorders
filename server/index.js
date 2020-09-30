@@ -461,14 +461,14 @@ app.post('/updateAvg', (req,res) => {
 	})
 	 
 // All remaining requests return the React app, so it can handle routing.
-  app.get('/', myAuth, (request, response) => {
+  app.get('/iorders', myAuth, (request, response) => {
     response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
   });
   
 
-// app.get('*', myAuth, function(request, response) {
-//     response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
-//   });
+ app.get('*', myAuth, function(request, response) {
+     response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
+   });
 	
 	
 //START SERVER
