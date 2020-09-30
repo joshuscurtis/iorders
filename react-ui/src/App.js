@@ -335,6 +335,7 @@ function TakeawayStream(props) {
 	for (var i = 0; i < orders.length; i++) {
 		if(orders[i].tablenum.substring(0,5) != "Table") {
     		rows.push(<CardApp 
+						key={orders[i].order_id}
 						orderid={orders[i].order_id}
 						order={orders[i]} 
 						time={orders[i].timeOpen}
@@ -364,6 +365,7 @@ function TableStream(props) {
 for (var i = 0; i < orders.length; i++) {
 	if(orders[i].tablenum.substring(0,5) == "Table") {
 			rows.push(<CardApp 
+					key={orders[i].order_id}
 					orderid={orders[i].order_id}
 					order={orders[i]} 
 					time={orders[i].timeOpen}
@@ -392,13 +394,13 @@ if(props.comment != null) comment = "Comment: " + props.comment;
 
 const [strikeClass, setStrikeClass] = useState("");
 
-// const handleClick = e => {
-// 	if(strikeClass !== "crossed-line") setStrikeClass("crossed-line");
-// 	if(strikeClass === "crossed-line") setStrikeClass("");
-// }
+ const handleClick = e => {
+ 	if(strikeClass !== "crossed-line") setStrikeClass("crossed-line");
+ 	if(strikeClass === "crossed-line") setStrikeClass("");
+ }
  
  return (
-<div className={strikeClass} onClick={setStrikeClass("crossed-line")}>
+<div className={strikeClass} onClick={handleClick}>
 	<Box m={1} borderBottom={1}>
 	    <Typography variant="h5" align="center">
 			{props.itemName}
