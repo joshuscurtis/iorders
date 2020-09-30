@@ -247,7 +247,7 @@ function CardApp(props) {
 
   return (
       <div className={alert}>
-		<Card className="OrderCard__Main" onClick={handleClick} style={{backgroundColor: props.isprocessing ? '#7ea8be' : '#66e559',}} variant="outlined">
+		<Card className="OrderCard__Main" onClick={handleClick} style={{backgroundColor: props.isprocessing ? '#7ea8be' : '#28a745',}} variant="outlined">
 			<CardHeader	
 				title={cardTitle}
 				subheader={props.time}
@@ -318,7 +318,7 @@ function ButtonAppBar() {
         <Toolbar className="AppBar__main">
 			<img className="AppBar__logo" src="iorder.png" />
 			<Typography className="App__Title" align="center" variant="h4" component="h1">
-		    	iOrders
+		    	iOrders - The Way
 			</Typography>
 			<SettingsDialog/>
         </Toolbar>
