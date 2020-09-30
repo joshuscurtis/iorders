@@ -51,7 +51,7 @@ pool.connect()
 
 
   app.use(basicAuth({
-    users: { 'someuser': 'somepassword' },
+    users: { 'staff': 'latte' },
     challenge: true,
     realm: 'Imb4T3st4pp',
 	}))
@@ -472,9 +472,7 @@ app.post('/updateAvg', (req,res) => {
 	 
 // All remaining requests return the React app, so it can handle routing.
 
-  
-
- app.get('*', myAuth, function(request, response) {
+ app.get('*', function(request, response) {
      response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
    });
 	
