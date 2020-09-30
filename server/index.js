@@ -406,7 +406,7 @@ app.post('/updateAvg', (req,res) => {
 		res.send('Date:' +date+" has been updated");
 	})
 	
-	app.get('/getStats', (req,res) => {
+	app.get('/getStats', myAuth, (req,res) => {
 		
 		var thisQuery = "SELECT * FROM public.stats order BY date;"
 
@@ -461,7 +461,12 @@ app.post('/updateAvg', (req,res) => {
 	})
 	 
 // All remaining requests return the React app, so it can handle routing.
-  app.get('*', myAuth, function(request, response) {
+  app.get('/', myAuth, function(request, response) {
+    response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
+  });
+  
+
+app.get('*', myAuth, function(request, response) {
     response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
   });
 	
