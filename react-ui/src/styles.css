@@ -1,0 +1,72 @@
+* {
+	margin: 0px;
+}
+
+.crossed-line {
+    text-decoration: line-through;
+}
+
+.AppBar__logo {
+	max-width: 10vw;
+	max-height: 70px;
+	min-height: auto;	
+}
+.OrderCard__CloseButton{
+	max-width: 50px;
+	float: right;
+}
+
+.OrderCard__Main {
+	box-shadow: 4px 4px 5px #333;
+	margin: 20px;
+}
+
+
+.OrderCard__Main:hover {
+	box-shadow: 4px 4px 10px #333;
+	margin: 20px;
+}
+
+
+.App__Title {
+	margin-left: 43vw;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+.AppBar__main {
+	justify-content:space-between;
+	background-color: #2F4858;
+}
+/*#28536b*/
+.App__settings{
+ 	margin-left: auto;
+ 	order: 2;
+}
+
+
+.Stream__title {
+	text-align: center;
+}
+
+.App_Contents {
+	margin-top: 9vh;
+}
+
+
+.Card__BarButton {
+	flex: 0.5;
+}
+.Card__KitButton {
+	flex: 0.5;
+}
+
+.flash{
+	animation: flash linear 2s infinite;
+}
+@keyframes flash {
+	0% { opacity: 1; } 
+	50% { opacity: .3; } 
+	100% { opacity: 1; }
+}
+	
