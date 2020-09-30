@@ -200,7 +200,7 @@ function CardApp(props) {
 	
 	
 	// useEffect(() => {
-	// 	if(checkAlert(props.time, count)) setAlert("flash");
+	//	if(checkAlert(props.time, count)) setAlert("flash");
 	// 	const interval = setInterval(() => {
 	// 		setTimer(timeCalc(props.time));
 	// 	}, 1000);
@@ -460,6 +460,7 @@ socket.on('connect', function(data) {
 });
 	
 export default function App() {
+const audio = new Audio('https://github.com/joshuscurtis/theway/raw/master/piece-of-cake.mp3');
 
 	const [orderData, setOrderData] = useState(0);
 	
@@ -497,6 +498,16 @@ export default function App() {
 		}
 	}, []);
 	
+		useEffect(() => {
+			socket.on('broadcast', function(data) {
+				console.log("new order...");
+				if(data.description == true) audio.play();
+			});
+			return () => {
+				socket.close();
+			}
+		}, []);
+		
 return (
   <div style={{ margin: 0, }}>
   	 <ButtonAppBar/>
