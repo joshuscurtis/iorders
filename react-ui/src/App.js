@@ -391,13 +391,14 @@ var comment = "";
 if(props.comment != null) comment = "Comment: " + props.comment;
 
 const [strikeClass, setStrikeClass] = useState("");
-const handleClick = e => {
-	if(strikeClass !== "crossed-line") setStrikeClass("crossed-line");
-	if(strikeClass === "crossed-line") setStrikeClass("");
-}
+
+// const handleClick = e => {
+// 	if(strikeClass !== "crossed-line") setStrikeClass("crossed-line");
+// 	if(strikeClass === "crossed-line") setStrikeClass("");
+// }
  
  return (
-<div className={strikeClass} onClick={handleClick}>
+<div className={strikeClass} onClick={setStrikeClass("crossed-line")}>
 	<Box m={1} borderBottom={1}>
 	    <Typography variant="h5" align="center">
 			{props.itemName}
