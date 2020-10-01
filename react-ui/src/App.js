@@ -402,7 +402,7 @@ const [strikeClass, setStrikeClass] = useState("");
  return (
 <div className={strikeClass} onClick={handleClick}>
 	<Box m={1} borderBottom={1}>
-	    <Typography variant="h4" align="center">
+	    <Typography variant="h5" align="center">
 			{props.itemName}
 	    </Typography>
 		<Typography variant="h6" color="textSecondary" align="center">
