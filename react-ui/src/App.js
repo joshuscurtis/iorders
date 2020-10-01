@@ -411,7 +411,7 @@ const [strikeClass, setStrikeClass] = useState("");
 		<Typography variant="h5" color="textSecondary" align="center">
 			Qty: {props.qty}
 		</Typography>
-			<Typography variant="subtitle2" color="textSecondary" align="center">
+			<Typography variant="h6" color="textSecondary" align="center">
 			{comment}
 		</Typography>
 	</Box>
