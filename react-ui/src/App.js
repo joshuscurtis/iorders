@@ -379,9 +379,11 @@ function TakeawayStream(props) {
   }
   return (
     <div id="take" className="Takeaway__Stream">
+		 <div className="Stream__title" >
       <Typography className="Stream__title" align="center" variant="h5">
         Takeaway Orders
       </Typography>
+	  </div>
       {rows}
     </div>
   );
@@ -412,9 +414,11 @@ function TableStream(props) {
   }
   return (
     <div id="table" className="Table__Stream">
-      <Typography className="Stream__title" align="center" variant="h5">
+	 <div className="Stream__title" >
+      <Typography  align="center" variant="h5">
         Table Orders
       </Typography>
+	  </div>
       {rows}
     </div>
   );
