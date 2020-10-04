@@ -190,11 +190,11 @@ function CardApp(props) {
   // const [close, setClose] = useState(false);
 
   //calc time
-
-   useEffect(() => {
-  	if(checkAlert(props.time, count)) setAlert("flash");
+	var count = useGlobalState("count");
 	
- 	 return () => {}
+	useEffect(() => {
+  		if(checkAlert(props.time, count)) setAlert("flash");
+	return () => {}
   	},[]);
 
   //default button colours
