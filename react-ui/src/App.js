@@ -114,7 +114,7 @@ function SettingsDialog(props) {
 
 
 function checkAlert(time, alertTime) {
-	timeOpen = time.substring(0,2);
+	 var timeOpen = time.substring(0,2);
 	
 	if(timeOpen>alertTime){
 		return(true)
@@ -189,6 +189,7 @@ function CardApp(props) {
   //set states
   // const [close, setClose] = useState(false);
 
+  const [alert, setAlert] = useState("");
   //calc time
 	var count = useGlobalState("count");
 	
