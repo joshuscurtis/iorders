@@ -556,10 +556,10 @@ export default function App() {
   return (
     <div style={{ margin: 0 }}>
       <ButtonAppBar />
-      <Container className="App_Contents" maxWidth="lg">
+      <div className="App_Contents">
         <TakeawayStream orders={orderData} />
         <TableStream orders={orderData} />
-      </Container>
+      </div>
     </div>
   );
 }
