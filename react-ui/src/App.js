@@ -321,7 +321,7 @@ function ButtonAppBar() {
     }
   }
 
-  return (
+ return (
     <div>
       <AppBar position="fixed">
         <Toolbar className="AppBar__main">
@@ -334,15 +334,16 @@ function ButtonAppBar() {
           >
             The Way
           </Typography>
-          <Button
-            className="toggle"
-            size="large"
-            variant="contained"
-            href={jump}
-            onClick={handleClick}
-          >
-            {jump.substring(1)}
-          </Button>
+          <div className="toggle">
+            <Button
+              size="large"
+              variant="contained"
+              href={jump}
+              onClick={handleClick}
+            >
+              {jump.substring(1)}
+            </Button>
+          </div>
           <SettingsDialog />
         </Toolbar>
       </AppBar>
