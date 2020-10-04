@@ -87,6 +87,11 @@
   }
   .toggle {
     display: inline;
+	margin-right: 5px;
+  }
+  
+ .App__Title {
+ display: none;
   }
 }
 
