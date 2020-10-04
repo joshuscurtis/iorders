@@ -343,7 +343,7 @@ return (
               href={jump}
               onClick={handleClick}
             >
-              {jump.substring(1)}
+			  {jump="#table" ? {"Table"} : {"Takeaway"}}
             </Button>
           </div>
           <SettingsDialog />
