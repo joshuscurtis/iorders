@@ -29,7 +29,7 @@ import io from "socket.io-client";
 import $ from "jquery";
 
 import "./styles.css";
-var orders = require("./orders.json");
+//var orders = require("./orders.json");
 
 const initialState = { count: 10 };
 const { useGlobalState, setGlobalState } = createGlobalState(initialState);
