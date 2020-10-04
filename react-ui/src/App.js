@@ -343,7 +343,7 @@ return (
               href={jump}
               onClick={handleClick}
             >
-			  {jump==="#table" ? "Table" :  "Takeaway"}
+			  {jump==="#table" ? "Takeaway" :  "Table"}
             </Button>
           </div>
           <SettingsDialog />
