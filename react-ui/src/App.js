@@ -501,11 +501,14 @@ const audio = new Audio(
 
 export default function App() {
   const [orderData, setOrderData] = useState(0);
-  useEffect(() => {
+ 
+ //for local
+ /*useEffect(() => {
     console.log(orders);
     setOrderData(orders.orders);
   }, []);
-
+*/
+  
   useEffect(() => {
     socket.on("load", function (data) {
       console.log("loading data...");
