@@ -111,15 +111,19 @@ function SettingsDialog(props) {
   );
 }
 
-/* function checkAlert(createdTime, alertAfter) {
-  var timeNow = Date.now();
-  var timeOpen = timeNow - createdTime;
-  timeOpen = new Date(timeOpen);
-  timeOpen = timeOpen / 1000;
-  if (timeOpen > alertAfter * 60) return true;
-  else return false;
+
+
+function checkAlert(time, alertTime) {
+	timeOpen = time.substring(0,2);
+	
+	if(timeOpen>alertTime){
+		return(true)
+	}
+	else return(false)
 }
- */
+
+
+
 function AlertDialog(props) {
   const [open, setOpen] = React.useState(false);
 
@@ -187,17 +191,11 @@ function CardApp(props) {
 
   //calc time
 
-  // useEffect(() => {
-  //	if(checkAlert(props.time, count)) setAlert("flash");
-  // 	const interval = setInterval(() => {
-  // 		setTimer(timeCalc(props.time));
-  // 	}, 1000);
-  // 	return () => {
-  // 		setTimer("null");
-  // 		clearInterval(interval);
-  // 		console.log("unmount timer")
-  // 	}
-  // 	},[]);
+   useEffect(() => {
+  	if(checkAlert(props.time, count)) setAlert("flash");
+	
+ 	 return () => {}
+  	},[]);
 
   //default button colours
   var kitCol = false;
