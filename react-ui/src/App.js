@@ -321,19 +321,21 @@ function ButtonAppBar() {
     }
   }
 
- return (
+return (
     <div>
       <AppBar position="fixed">
         <Toolbar className="AppBar__main">
           <img alt="" className="AppBar__logo" src="iorder.png" />
+         <div className="App__Title">
           <Typography
-            className="App__Title"
             align="center"
             variant="h4"
             component="h1"
           >
             The Way
           </Typography>
+          </div>
+
           <div className="toggle">
             <Button
               size="large"
