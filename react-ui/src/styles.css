@@ -1,72 +1,113 @@
 * {
-	margin: 0px;
+  margin: 0px;
 }
 
 .crossed-line {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 .AppBar__logo {
-	max-width: 10vw;
-	max-height: 70px;
-	min-height: auto;	
+  max-width: 10vw;
+  max-height: 70px;
+  min-height: auto;
 }
-.OrderCard__CloseButton{
-	max-width: 50px;
-	float: right;
+.OrderCard__CloseButton {
+  max-width: 50px;
+  float: right;
 }
 
 .OrderCard__Main {
-	box-shadow: 4px 4px 5px #333;
-	margin: 20px;
+  box-shadow: 4px 4px 5px #333;
+  margin: 10px;
 }
-
 
 .OrderCard__Main:hover {
-	box-shadow: 4px 4px 10px #333;
-	margin: 20px;
+  box-shadow: 4px 4px 10px #333;
 }
 
-
 .App__Title {
-	margin-left: 43vw;
-	margin-bottom: 5px;
-	margin-top: 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  max-height: 45px;
+  overflow: hidden;
+  font-size: 2em;
+  justify-content: center;
 }
 
 .AppBar__main {
-	justify-content:space-between;
-	background-color: #2F4858;
+  display: flex;
+  justify-content: space-between;
+  background-color: #2f4858;
 }
 /*#28536b*/
-.App__settings{
- 	margin-left: auto;
- 	order: 2;
+.App__settings {
+  margin-left: auto;
+  order: 2;
 }
 
+.Takeaway__Stream {
+  display: flex;
+  flex-direction: column;
+  flex: 0.5;
+}
+
+.Table__Stream {
+  display: flex;
+  flex-direction: column;
+  flex: 0.5;
+}
 
 .Stream__title {
-	text-align: center;
+  text-align: center;
+  margin-top: 70px;
 }
 
 .App_Contents {
-	margin-top: 9vh;
+  display: flex;
+  flex-direction: row;
 }
+.toggle {
+  display: none;
+}
+@media only screen and (max-width: 500px) {
+  .Takeaway__Stream {
+    flex: 0.5;
+  }
 
+  .Table__Stream {
+    flex: 0.5;
+  }
+  .App_Contents {
+    flex-direction: column;
+    flex-direction: column-reverse;
+  }
+
+  .Stream__title {
+    text-align: center;
+  }
+  .toggle {
+    display: inline;
+  }
+}
 
 .Card__BarButton {
-	flex: 0.5;
+  flex: 0.5;
 }
 .Card__KitButton {
-	flex: 0.5;
+  flex: 0.5;
 }
 
-.flash{
-	animation: flash linear 2s infinite;
+.flash {
+  animation: flash linear 2s infinite;
 }
 @keyframes flash {
-	0% { opacity: 1; } 
-	50% { opacity: .3; } 
-	100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-	
