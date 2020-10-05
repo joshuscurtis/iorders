@@ -173,9 +173,6 @@ function checkAlert(time, alertTime) {
   var timeOpen = time.substring(0, 2);
   if (time.substring(1, 2) === "m") timeOpen = time.substring(0, 1);
 
-  console.log(timeOpen);
-  console.log(alertTime);
-
   if (timeOpen > alertTime) {
     return true;
   } else return false;
