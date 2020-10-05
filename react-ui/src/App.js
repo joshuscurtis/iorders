@@ -89,9 +89,6 @@ function SettingsDialog(props) {
           </DialogContentText>
           <DialogContentText id="alert-dialog-description">
           </DialogContentText>
-          <Button size="large" variant="contained">
-            Dashboard
-          </Button>
         </DialogContent>
 
         <DialogActions>
