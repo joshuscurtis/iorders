@@ -88,7 +88,6 @@ function SettingsDialog(props) {
             orders ariving.
           </DialogContentText>
           <DialogContentText id="alert-dialog-description">
-            WIP
           </DialogContentText>
           <Button size="large" variant="contained">
             Dashboard
@@ -191,8 +190,10 @@ function CardApp(props) {
   //calc time
   var count = useGlobalState("count");
 
+
   useEffect(() => {
     if (checkAlert(props.time, count[0])) setAlert("flash");
+    else setAlert("");
     return () => {};
   }, [count, props.time]);
 
