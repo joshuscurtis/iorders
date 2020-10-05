@@ -111,19 +111,6 @@ function SettingsDialog(props) {
   );
 }
 
-
-
-function checkAlert(time, alertTime) {
-	 var timeOpen = time.substring(0,2);
-	
-	if(timeOpen>alertTime){
-		return(true)
-	}
-	else return(false)
-}
-
-
-
 function AlertDialog(props) {
   const [open, setOpen] = React.useState(false);
 
@@ -183,6 +170,17 @@ function AlertDialog(props) {
     </div>
   );
 }
+function checkAlert(time, alertTime) {
+  var timeOpen = time.substring(0, 2);
+  if (time.substring(1, 2) === "m") timeOpen = time.substring(0, 1);
+
+  console.log(timeOpen);
+  console.log(alertTime);
+
+  if (timeOpen > alertTime) {
+    return true;
+  } else return false;
+}
 
 function CardApp(props) {
   //do not create closed orders
@@ -191,12 +189,12 @@ function CardApp(props) {
 
   const [alert, setAlert] = useState("");
   //calc time
-	var count = useGlobalState("count");
-	
-	useEffect(() => {
-  		if(checkAlert(props.time, count)) setAlert("flash");
-	return () => {}
-  	},[]);
+  var count = useGlobalState("count");
+
+  useEffect(() => {
+    if (checkAlert(props.time, count[0])) setAlert("flash");
+    return () => {};
+  }, [count, props.time]);
 
   //default button colours
   var kitCol = false;
