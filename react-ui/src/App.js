@@ -207,12 +207,11 @@ function CardApp(props) {
   }
   else if (props.isfoyer !== "null" && props.isfoyer !== null) {
     	cardTitle = props.isfoyer + " (Order: " + ((props.orderid % 99) + 1) + ")";
-  	}
+  }
   else if (props.isfoyer === "null") {
 	   cardTitle = "Order: " + ((props.orderid % 99) + 1);
-   }
   }
-}
+
 
 
 
