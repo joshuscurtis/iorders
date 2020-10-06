@@ -204,7 +204,7 @@ function CardApp(props) {
   if (props.tablenum != null) {
     cardTitle = props.tablenum + " (Order: " + ((props.orderid % 99) + 1) + ")";
   }
-  if (props.isfoyer != null) {
+  if (props.isfoyer != 'null') {
     cardTitle = props.isfoyer + " (Order: " + ((props.orderid % 99) + 1) + ")";
 }
 
@@ -458,7 +458,7 @@ function OrderItems(props) {
   //console.log(order);
   var rows = [];
   for (var i = 0; i < order.products.length; i++) {
-    if (order.products[i].name.substring(0, 5) !== "Table") {
+    if (order.products[i].name.substring(0, 5) !== "Table" || order.products[i].name.substring(0, 5) !== "Foyer") {
       rows.push(
         <OrderItem
           variantName={order.products[i].variantName}
