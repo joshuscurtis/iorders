@@ -167,10 +167,10 @@ function AlertDialog(props) {
   );
 }
 function checkAlert(time, alertTime) {
-  var timeOpen = time.substring(0, 2);
-  if (time.substring(1, 2) === "m") timeOpen = time.substring(0, 1);
+  var timeopen = time.substring(0, 2);
+  if (time.substring(1, 2) === "m") timeopen = time.substring(0, 1);
 
-  if (timeOpen > alertTime) {
+  if (timeopen > alertTime) {
     return true;
   } else return false;
 }
@@ -355,7 +355,7 @@ function TakeawayStream(props) {
           key={orders[i].order_id}
           orderid={orders[i].order_id}
           order={orders[i]}
-          time={orders[i].timeOpen}
+          time={orders[i].timeopen}
           isprocessing={orders[i].isprocessing}
           istable={orders[i].istable}
           isnew={orders[i].isnew}
@@ -391,7 +391,7 @@ function TableStream(props) {
           key={orders[i].order_id}
           orderid={orders[i].order_id}
           order={orders[i]}
-          time={orders[i].timeOpen}
+          time={orders[i].timeopen}
           isprocessing={orders[i].isprocessing}
           istable={orders[i].istable}
           isnew={orders[i].isnew}

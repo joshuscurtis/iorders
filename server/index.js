@@ -243,10 +243,10 @@ setInterval(function(){
 
 function timeDiffStr(createdTime) {
 		const timeNow = Date.now();
-		let timeOpen2 = timeNow - createdTime;
-		let timeOpen = new Date(timeOpen2);
-		const timeOpenStr = timeOpen.getMinutes() + "m " + timeOpen.getSeconds()+"s"
-	return (timeOpenStr);
+		let timeopen2 = timeNow - createdTime;
+		let timeopen = new Date(timeopen2);
+		const timeopenStr = timeopen.getMinutes() + "m " + timeopen.getSeconds()+"s"
+	return (timeopenStr);
 }
 
 
@@ -257,7 +257,7 @@ function setOrderTimeDiff(){
 		for (var i = 0; i < orders.length; i++) {
 			timeString = timeDiffStr(orders[i].time);
 			if(orders[i].isclosed === false){
-				query = "UPDATE devorders SET \"timeOpen\" = '"+timeString+"' WHERE order_id = "+ orders[i].order_id+";"
+				query = "UPDATE devorders SET \"timeopen\" = '"+timeString+"' WHERE order_id = "+ orders[i].order_id+";"
 				pool.query(query, (err, res) => {
 				})
 		}
@@ -301,7 +301,7 @@ setInterval(function() {
 	
 				
 		//send to pg
-		var thisQuery = "INSERT INTO public.devorders (order_id, products, istable, isnew, isclosed, isprocessing, time, tablenum, isfoyer, timeOpen) VALUES ("+auth1.purchases[0].globalPurchaseNumber+", '" +JSON.stringify(auth1.purchases[0].products)+"',"+doesOrderContainTable(auth1.purchases[0].products)+", "+true+", "+false+", "+false+", "+theTime+",'"+getTableNum(auth1.purchases[0].products)+"', '"+getFoyerNum(auth1.purchases[0].products)+"', '0m 0s');"
+		var thisQuery = "INSERT INTO public.devorders (order_id, products, istable, isnew, isclosed, isprocessing, time, tablenum, isfoyer, timeopen) VALUES ("+auth1.purchases[0].globalPurchaseNumber+", '" +JSON.stringify(auth1.purchases[0].products)+"',"+doesOrderContainTable(auth1.purchases[0].products)+", "+true+", "+false+", "+false+", "+theTime+",'"+getTableNum(auth1.purchases[0].products)+"', '"+getFoyerNum(auth1.purchases[0].products)+"', '0m 0s');"
 		
 		console.log(thisQuery);
 		var latest;
