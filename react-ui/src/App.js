@@ -199,29 +199,20 @@ function CardApp(props) {
 
   //create card title
   var cardTitle = "Order: " + ((props.orderid % 99) + 1);
-      cardTitle = "Order: " + ((props.orderid % 99) + 1);
   
-  if (props.tablenum != null) {
+  if (props.istable === true){
+ 	 if (props.tablenum != null) {
     cardTitle = props.tablenum + " (Order: " + ((props.orderid % 99) + 1) + ")";
+  	}
   }
-  if (props.isfoyer != 'null' || null) {
-    cardTitle = props.isfoyer + " (Order: " + ((props.orderid % 99) + 1) + ")";
+  else {
+  	if (props.isfoyer != 'null' ||props.isfoyer != null) {
+    	cardTitle = props.isfoyer + " (Order: " + ((props.orderid % 99) + 1) + ")";
+  	}
 }
 
 
 
-
-  // //set order id
-  // const [id, setId] = useState(props.orderid);
-  // useEffect(() => {
-  // 	setClose(false)
-  // 	setId(props.orderid);
-  // 	console.log('setId: ' + id)
-  // 	return () => {
-  // 		setTimer("null");
-  // 		console.log('return block')
-  // 	}
-  // }, []);
 
   //onClick action
   const handleClick = (e) => {
