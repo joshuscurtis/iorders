@@ -199,12 +199,17 @@ function CardApp(props) {
 
   //create card title
   var cardTitle = "Order: " + ((props.orderid % 99) + 1);
+      cardTitle = "Order: " + ((props.orderid % 99) + 1);
+  
   if (props.tablenum != null) {
     cardTitle = props.tablenum + " (Order: " + ((props.orderid % 99) + 1) + ")";
   }
-  if (props.tablenum.substring(0, 5) !== "Table") {
-    cardTitle = "Order: " + ((props.orderid % 99) + 1);
-  }
+  if (props.isfoyer != null) {
+    cardTitle = props.isfoyer + " (Order: " + ((props.orderid % 99) + 1) + ")";
+}
+
+
+
 
   // //set order id
   // const [id, setId] = useState(props.orderid);
@@ -365,6 +370,7 @@ function TakeawayStream(props) {
           tablenum={orders[i].tablenum}
           assignee={orders[i].assignee}
           assignee2={orders[i].assignee2}
+		  isfoyer={orders[i].isfoyer}
         />
       );
     }

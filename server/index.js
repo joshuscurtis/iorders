@@ -165,6 +165,30 @@ return tableCheck;
 
 
 
+function getFoyerNum(orderData) {
+	if (orderData != null) {
+    var itemsInOrder = orderData.length;
+}
+    var count = -1;
+    var tableCheck = null;
+    var tableOrder;
+    for (var y = 0; y < itemsInOrder; y++) {
+        var orderName = orderData[y].name.substring(0,5)
+        if(orderName == "Foyer") {
+            tableOrder = true;
+            tableCheck = orderData[y].name;
+            table = orderData[y].name;
+            count = count + 1
+        }
+    }
+    if(tableCheck == null) {tableOrder = false}
+return tableCheck;
+}
+
+
+
+
+
 
 // auth settings
 var options = {
@@ -277,7 +301,7 @@ setInterval(function() {
 	
 				
 		//send to pg
-		var thisQuery = "INSERT INTO public.devorders (order_id, products, istable, isnew, isclosed, isprocessing, time, tablenum, isfoyer) VALUES ("+auth1.purchases[0].globalPurchaseNumber+", '" +JSON.stringify(auth1.purchases[0].products)+"',"+doesOrderContainTable(auth1.purchases[0].products)+", "+true+", "+false+", "+false+", "+theTime+",'"+getTableNum(auth1.purchases[0].products)+doesOrderContainFoyer(auth1.purchases[0].products)+"');"
+		var thisQuery = "INSERT INTO public.devorders (order_id, products, istable, isnew, isclosed, isprocessing, time, tablenum, isfoyer) VALUES ("+auth1.purchases[0].globalPurchaseNumber+", '" +JSON.stringify(auth1.purchases[0].products)+"',"+doesOrderContainTable(auth1.purchases[0].products)+", "+true+", "+false+", "+false+", "+theTime+",'"+getTableNum(auth1.purchases[0].products)+getFoyerNum(auth1.purchases[0].products)+"');"
 		
 		
 		var latest;
