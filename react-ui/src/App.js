@@ -204,7 +204,7 @@ function CardApp(props) {
   if (props.tablenum != null) {
     cardTitle = props.tablenum + " (Order: " + ((props.orderid % 99) + 1) + ")";
   }
-  if (props.isfoyer != 'null') {
+  if (props.isfoyer != 'null' || null) {
     cardTitle = props.isfoyer + " (Order: " + ((props.orderid % 99) + 1) + ")";
 }
 
