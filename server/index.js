@@ -303,7 +303,7 @@ setInterval(function() {
 		//send to pg
 		var thisQuery = "INSERT INTO public.devorders (order_id, products, istable, isnew, isclosed, isprocessing, time, tablenum, isfoyer) VALUES ("+auth1.purchases[0].globalPurchaseNumber+", '" +JSON.stringify(auth1.purchases[0].products)+"',"+doesOrderContainTable(auth1.purchases[0].products)+", "+true+", "+false+", "+false+", "+theTime+",'"+getTableNum(auth1.purchases[0].products)+",'"+getFoyerNum(auth1.purchases[0].products)+"');"
 		
-		
+		console.log(thisQuery);
 		var latest;
 		var newOrder;
 		maxQ = "SELECT MAX(order_id) FROM devorders;"
