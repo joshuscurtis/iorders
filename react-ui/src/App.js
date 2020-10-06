@@ -452,7 +452,7 @@ function OrderItems(props) {
   var rows = [];
   for (var i = 0; i < order.products.length; i++) {
     if (order.products[i].name.substring(0, 5) !== "Table") {
-		if(|| order.products[i].name.substring(0, 5) !== "Foyer") {
+		if(order.products[i].name.substring(0, 5) !== "Foyer") {
 	      rows.push(
 	        <OrderItem
 	          variantName={order.products[i].variantName}
