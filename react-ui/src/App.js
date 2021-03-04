@@ -87,8 +87,7 @@ function SettingsDialog(props) {
             This will adjust the time before an alert is shown for any new
             orders ariving.
           </DialogContentText>
-          <DialogContentText id="alert-dialog-description">
-          </DialogContentText>
+          <DialogContentText id="alert-dialog-description"></DialogContentText>
         </DialogContent>
 
         <DialogActions>
@@ -184,7 +183,6 @@ function CardApp(props) {
   //calc time
   var count = useGlobalState("count");
 
-
   useEffect(() => {
     if (checkAlert(props.time, count[0])) setAlert("flash");
     else setAlert("");
@@ -199,22 +197,17 @@ function CardApp(props) {
 
   //create card title
   var cardTitle = "Order: " + ((props.orderid % 99) + 1);
-  
-  if (props.istable === true){
- 	 if (props.tablenum !== null) {
-    cardTitle = props.tablenum + " (Order: " + ((props.orderid % 99) + 1) + ")";
-  	}
+
+  if (props.istable === true) {
+    if (props.tablenum !== null) {
+      cardTitle =
+        props.tablenum + " (Order: " + ((props.orderid % 99) + 1) + ")";
+    }
+  } else if (props.isfoyer !== "null" && props.isfoyer !== null) {
+    cardTitle = props.isfoyer + " (Order: " + ((props.orderid % 99) + 1) + ")";
+  } else if (props.isfoyer === "null") {
+    cardTitle = "Order: " + ((props.orderid % 99) + 1);
   }
-  else if (props.isfoyer !== "null" && props.isfoyer !== null) {
-    	cardTitle = props.isfoyer + " (Order: " + ((props.orderid % 99) + 1) + ")";
-  }
-  else if (props.isfoyer === "null") {
-	   cardTitle = "Order: " + ((props.orderid % 99) + 1);
-  }
-
-
-
-
 
   //onClick action
   const handleClick = (e) => {
@@ -263,7 +256,7 @@ function BarButton(props) {
       size="large"
       style={{
         backgroundColor: props.colour ? "#5cb85c" : "#f50057",
-        color: "white"
+        color: "white",
       }}
     >
       <LocalCafeIcon />
@@ -285,7 +278,7 @@ function KitchenButton(props) {
       variant="contained"
       style={{
         backgroundColor: props.colour ? "#5cb85c" : "#f50057",
-        color: "white"
+        color: "white",
       }}
       size="large"
     >
@@ -311,19 +304,15 @@ function ButtonAppBar() {
     }
   }
 
-return (
+  return (
     <div>
       <AppBar position="fixed">
         <Toolbar className="AppBar__main">
           <img alt="" className="AppBar__logo" src="logo.webp" />
-         <div className="App__Title">
-          <Typography
-            align="center"
-            variant="h4"
-            component="h1"
-          >
-            The Way
-          </Typography>
+          <div className="App__Title">
+            <Typography align="center" variant="h4" component="h1">
+              The Way
+            </Typography>
           </div>
 
           <div className="toggle">
@@ -333,7 +322,7 @@ return (
               href={jump}
               onClick={handleClick}
             >
-			  {jump==="#table" ? "Takeaway" : "Table"}
+              {jump === "#table" ? "Takeaway" : "Table"}
             </Button>
           </div>
           <SettingsDialog />
@@ -363,18 +352,18 @@ function TakeawayStream(props) {
           tablenum={orders[i].tablenum}
           assignee={orders[i].assignee}
           assignee2={orders[i].assignee2}
-		  isfoyer={orders[i].isfoyer}
+          isfoyer={orders[i].isfoyer}
         />
       );
     }
   }
   return (
     <div id="take" className="Takeaway__Stream">
-		 <div className="Stream__title" >
-      <Typography className="Stream__title" align="center" variant="h5">
-        Takeaway Orders
-      </Typography>
-	  </div>
+      <div className="Stream__title">
+        <Typography className="Stream__title" align="center" variant="h5">
+          Takeaway Orders
+        </Typography>
+      </div>
       {rows}
     </div>
   );
@@ -405,11 +394,11 @@ function TableStream(props) {
   }
   return (
     <div id="table" className="Table__Stream">
-	 <div className="Stream__title" >
-      <Typography  align="center" variant="h5">
-        Table Orders
-      </Typography>
-	  </div>
+      <div className="Stream__title">
+        <Typography align="center" variant="h5">
+          Table Orders
+        </Typography>
+      </div>
       {rows}
     </div>
   );
@@ -452,18 +441,18 @@ function OrderItems(props) {
   var rows = [];
   for (var i = 0; i < order.products.length; i++) {
     if (order.products[i].name.substring(0, 5) !== "Table") {
-		if(order.products[i].name.substring(0, 5) !== "Foyer") {
-	      rows.push(
-	        <OrderItem
-	          variantName={order.products[i].variantName}
-	          itemName={order.products[i].name}
-	          qty={order.products[i].quantity}
-	          comment={order.products[i].comment}
-	          key={i}
-	        />
-	      );
-    	}
-	}
+      if (order.products[i].name.substring(0, 5) !== "Foyer") {
+        rows.push(
+          <OrderItem
+            variantName={order.products[i].variantName}
+            itemName={order.products[i].name}
+            qty={order.products[i].quantity}
+            comment={order.products[i].comment}
+            key={i}
+          />
+        );
+      }
+    }
   }
   return <div>{rows}</div>;
 }
@@ -474,13 +463,13 @@ function updatePG(id, column, value) {
     method: "POST",
     timeout: 0,
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/x-www-form-urlencoded",
     },
     data: {
       value: value,
       id: id,
-      column: column
-    }
+      column: column,
+    },
   };
   $.ajax(settings)
     .done(function (response) {})
@@ -501,14 +490,14 @@ const audio = new Audio(
 
 export default function App() {
   const [orderData, setOrderData] = useState(0);
- 
- //for local
- /*useEffect(() => {
-    console.log(orders);
-    setOrderData(orders.orders);
-  }, []);
-*/
-  
+
+  //for local
+  /*useEffect(() => {
+     console.log(orders);
+     setOrderData(orders.orders);
+   }, []);
+ */
+
   useEffect(() => {
     socket.on("load", function (data) {
       console.log("loading data...");
