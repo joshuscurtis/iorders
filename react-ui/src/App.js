@@ -87,7 +87,7 @@ function SettingsDialog(props) {
             This will adjust the time before an alert is shown for any new
             orders ariving.
           </DialogContentText>
-          <DialogContentText id="alert-dialog-description">``Made By Josh!</DialogContentText>
+          <DialogContentText id="alert-dialog-description">Made By Josh!</DialogContentText>
         </DialogContent>
 
         <DialogActions>
