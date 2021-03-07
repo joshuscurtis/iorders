@@ -238,7 +238,36 @@ function CardApp(props) {
     </div>
   );
 }
+function OrderItem(props) {
+  var comment = "";
+  if (props.comment != null) comment = "Comment: " + props.comment;
 
+  const [strikeClass, setStrikeClass] = useState("");
+
+  const handleClick = (e) => {
+    if (strikeClass !== "crossed-line") setStrikeClass("crossed-line");
+    if (strikeClass === "crossed-line") setStrikeClass("");
+  };
+
+  return (
+    <div className={strikeClass} onClick={handleClick}>
+      <Box m={1} borderBottom={1}>
+        <Typography variant="h5" align="center">
+          {props.itemName}
+        </Typography>
+        <Typography variant="h6" color="textSecondary" align="center">
+          {props.variantName}
+        </Typography>
+        <Typography variant="h5" color="textSecondary" align="center">
+          Qty: {props.qty}
+        </Typography>
+        <Typography variant="h6" color="textSecondary" align="center">
+          {comment}
+        </Typography>
+      </Box>
+    </div>
+  );
+}
 function BarButton(props) {
   const handleClick = (e) => {
     e.stopPropagation();
