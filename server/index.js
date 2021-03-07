@@ -8,6 +8,7 @@ const options3 = {
 };
 
 //nodejs packages
+require('newrelic');
 const express = require("express");
 const path = require("path");
 const app = express();

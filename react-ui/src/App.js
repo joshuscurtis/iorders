@@ -29,7 +29,6 @@ import io from "socket.io-client";
 import $ from "jquery";
 
 import "./styles.css";
-//var orders = require("./orders.json");
 
 const initialState = { count: 10 };
 const { useGlobalState, setGlobalState } = createGlobalState(initialState);
@@ -87,7 +86,9 @@ function SettingsDialog(props) {
             This will adjust the time before an alert is shown for any new
             orders ariving.
           </DialogContentText>
-          <DialogContentText id="alert-dialog-description">Made By Josh!</DialogContentText>
+          <DialogContentText id="alert-dialog-description">
+            Made By Josh!
+          </DialogContentText>
         </DialogContent>
 
         <DialogActions>
@@ -175,10 +176,6 @@ function checkAlert(time, alertTime) {
 }
 
 function CardApp(props) {
-  //do not create closed orders
-  //set states
-  // const [close, setClose] = useState(false);
-
   const [alert, setAlert] = useState("");
   //calc time
   var count = useGlobalState("count");
@@ -404,37 +401,6 @@ function TableStream(props) {
   );
 }
 
-function OrderItem(props) {
-  var comment = "";
-  if (props.comment != null) comment = "Comment: " + props.comment;
-
-  const [strikeClass, setStrikeClass] = useState("");
-
-  const handleClick = (e) => {
-    if (strikeClass !== "crossed-line") setStrikeClass("crossed-line");
-    if (strikeClass === "crossed-line") setStrikeClass("");
-  };
-
-  return (
-    <div className={strikeClass} onClick={handleClick}>
-      <Box m={1} borderBottom={1}>
-        <Typography variant="h5" align="center">
-          {props.itemName}
-        </Typography>
-        <Typography variant="h6" color="textSecondary" align="center">
-          {props.variantName}
-        </Typography>
-        <Typography variant="h5" color="textSecondary" align="center">
-          Qty: {props.qty}
-        </Typography>
-        <Typography variant="h6" color="textSecondary" align="center">
-          {comment}
-        </Typography>
-      </Box>
-    </div>
-  );
-}
-
 function OrderItems(props) {
   var order = props.order;
   //console.log(order);
@@ -491,12 +457,6 @@ const audio = new Audio(
 export default function App() {
   const [orderData, setOrderData] = useState(0);
 
-  //for local
-  /*useEffect(() => {
-     console.log(orders);
-     setOrderData(orders.orders);
-   }, []);
- */
 
   useEffect(() => {
     socket.on("load", function (data) {
