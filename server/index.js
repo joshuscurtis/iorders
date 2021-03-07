@@ -8,24 +8,24 @@ const options3 = {
 };
 
 //nodejs packages
-require('newrelic');
-const express = require("express");
-const path = require("path");
+import 'newrelic';
+import express, { static } from "express";
+import { resolve } from "path";
 const app = express();
-const http = require("http");
-const basicAuth = require("express-basic-auth");
+import http from "http";
+import basicAuth from "express-basic-auth";
 const server = require("http").createServer(app);
-const request = require("request");
-const bodyParser = require("body-parser");
+import request from "request";
+import { urlencoded, json } from "body-parser";
 const io = require("socket.io")(server, options3);
-const pg = require("pg");
+import pg from "pg";
 
 //error page for auth
 var basicAuthError =
   '<html lang="id" dir="ltr">  <head>      <meta charset="utf-8" />      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />      <meta name="description" content="" />      <meta name="author" content="" />       <!-- Title -->      <title>Sorry, This Page Can&#39;t Be Accessed</title>      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous" /> </head>  <body class="bg-dark text-white py-5">      <div class="container py-5">           <div class="row">                <div class="col-md-2 text-center">                     <p><i class="fa fa-exclamation-triangle fa-5x"></i><br/>Status Code: 403</p>                </div>                <div class="col-md-10">                     <h3>Incorrect Credentials</h3>                     <p>Your username and or password is incorrect. Please contact Rob, Steve or Jeremy for help.<br/>If you think you have made a mistake, please try again.</p>                     <a class="btn btn-danger" href="javascript:location.reload();">Try Again</a>                </div>           </div>      </div>       </body>  </html>';
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(urlencoded({ extended: false }));
+app.use(json());
 
 //socket io
 io.on("connection", function (client) {
@@ -45,7 +45,7 @@ io.on("connection", function (client) {
 
 //pg connection
 var data;
-const { Pool, Client } = require("pg");
+import { Pool, Client } from "pg";
 
 const pool = new Pool({
   connectionString: connectionString,
@@ -390,7 +390,7 @@ basicAuth({
 });
 
 // Priority serve any static files.
-app.use(express.static(path.resolve(__dirname, "../react-ui/build")));
+app.use(static(resolve(__dirname, "../react-ui/build")));
 
 // Answer API requests.
 app.get("/api", function (req, res) {
@@ -583,7 +583,7 @@ app.get("/orders/20/", (req, res) => {
 // All remaining requests return the React app, so it can handle routing.
 
 app.get("*", function (request, response) {
-  response.sendFile(path.resolve(__dirname, "../react-ui/build", "index.html"));
+  response.sendFile(resolve(__dirname, "../react-ui/build", "index.html"));
 });
 
 //START SERVER
