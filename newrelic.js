@@ -9,11 +9,11 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: ['iorders dev'],
+  app_name: ['dev'],
   /**
    * Your New Relic license key.
    */
-  license_key: 'eu01xx743b64140a005b9a01f2912c3683efNRAL',
+  license_key: 'f583f9e55e3eb29a3a659eb8c629f873960dNRAL',
   /**
    * This setting controls distributed tracing.
    * Distributed tracing lets you see the path that a request takes through your

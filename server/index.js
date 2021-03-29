@@ -1,3 +1,4 @@
+require('newrelic');
 //env vars from heroku
 const PORT = process.env.PORT || 5000;
 const APIKEY = process.env.API;
@@ -8,7 +9,6 @@ const options3 = {
 };
 
 //nodejs packages
-require('newrelic');
 const express = require("express");
 const path = require("path");
 const app = express();
